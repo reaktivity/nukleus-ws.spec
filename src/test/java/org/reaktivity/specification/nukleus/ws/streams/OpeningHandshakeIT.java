@@ -43,8 +43,8 @@ public class OpeningHandshakeIT
             .directory("target/nukleus-itests")
             .streams("ws", "source")
             .streams("target", "ws#source")
-            .streams("ws", "replySource")
-            .streams("replyTarget", "ws#replySource");
+            .streams("ws", "target")
+            .streams("source", "ws#target");
 
     @Rule
     public final TestRule chain = outerRule(nukleus).around(k3po).around(timeout);
@@ -58,8 +58,8 @@ public class OpeningHandshakeIT
     public void shouldEstablishConnection() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_INITIAL");
-        k3po.notifyBarrier("ROUTED_REPLY");
+        k3po.notifyBarrier("ROUTED_INPUT");
+        k3po.notifyBarrier("ROUTED_OUTPUT");
         k3po.finish();
     }
 
