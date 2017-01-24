@@ -14,28 +14,28 @@
 # under the License.
 #
 
-property newInitialRef ${nuklei:newReferenceId()} # external scope
+property newSourceInputRef ${nuklei:newReferenceId()} # external scope
 
 property nuklei ${nuklei:directory("target/nukleus-itests").streamsCapacity(1024 * 1024, 64 * 1024)}
 
-property sourceInitial ${nuklei.streams("ws", "source")}
-property sourceReply ${nuklei.streams("replyTarget", "ws#replySource")}
+property sourceInput ${nuklei.streams("ws", "source")}
+property sourceOutputEst ${nuklei.streams("source", "ws#target")}
 
-property newInitialId ${nuklei:newStreamId()}
-property newCorrelationId ${nuklei:newCorrelationId()}
+property newSourceInputId ${nuklei:newStreamId()}
+property newSourceCorrelationId ${nuklei:newCorrelationId()}
 
-property newKey ${ws:handshakeKey()}
+property newHandshakeKey ${ws:handshakeKey()}
 
-connect await ROUTED_INITIAL
+connect await ROUTED_OUTPUT
         agrona://stream/bidirectional
-        option reader ${agrona:oneToOneReader(sourceInitial.throttle)}
-        option writer ${agrona:oneToOneWriter(sourceInitial.buffer)}
+        option reader ${agrona:oneToOneReader(sourceInput.throttle)}
+        option writer ${agrona:oneToOneWriter(sourceInput.buffer)}
 connected
 
 write [0x00 0x00 0x00 0x01]
-write ${newInitialId}
-write ${newInitialRef}
-write ${newCorrelationId}
+write ${newSourceInputId}
+write ${newSourceInputRef}
+write ${newSourceCorrelationId}
 write [0xaa]
 write [0x00] [0x07] ":scheme" [0x04] "http"
 write [0x00] [0x07] ":method" [0x03] "GET"
@@ -43,57 +43,57 @@ write [0x00] [0x05] ":path" [0x05] "/echo"
 write [0x00] [0x04] "host" [0x0e] "localhost:8080"
 write [0x00] [0x07] "upgrade" [0x09] "websocket"
 write [0x00] [0x0a] "connection" [0x07] "upgrade"
-write [0x00] [0x11] "sec-websocket-key" [0x18] ${newKey}
+write [0x00] [0x11] "sec-websocket-key" [0x18] ${newHandshakeKey}
 write [0x00] [0x15] "sec-websocket-version" [0x02] "13"
 write flush
 
 read [0x40 0x00 0x00 0x02]
-read ${newInitialId}
+read ${newSourceInputId}
 read [0..4]
 
 write [0x00 0x00 0x00 0x02]
-write ${newInitialId}
+write ${newSourceInputId}
 write [0x06]
 write [0x82 0x80] ${ws:randomBytes(4)}
 write [0x00]
 write flush
 
 read [0x40 0x00 0x00 0x02]
-read ${newInitialId}
+read ${newSourceInputId}
 read [0..4]
 
 close
 closed
 
-connect await ROUTED_REPLY
+connect await ROUTED_OUTPUT
         agrona://stream/bidirectional
-        option reader ${agrona:oneToOneReader(sourceReply.buffer)}
-        option writer ${agrona:oneToOneWriter(sourceReply.throttle)}
+        option reader ${agrona:oneToOneReader(sourceOutputEst.buffer)}
+        option writer ${agrona:oneToOneWriter(sourceOutputEst.throttle)}
 connected
 
 read [0x00 0x00 0x00 0x01]
-read ([0..8]:replyId)
-read ([0..8]:replyRef)
-read ${newCorrelationId}
+read ([0..8]:sourceOutputEstId)
+read [0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00]
+read ${newSourceCorrelationId}
 read [0x67]
 read [0x00] [0x07] ":status" [0x03] "101"
 read [0x00] [0x07] "upgrade" [0x09] "websocket"
 read [0x00] [0x0a] "connection" [0x07] "upgrade"
-read [0x00] [0x14] "sec-websocket-accept" [0x1c] ${ws:handshakeHash(newKey)}
+read [0x00] [0x14] "sec-websocket-accept" [0x1c] ${ws:handshakeHash(newHandshakeKey)}
 
 write [0x40 0x00 0x00 0x02]
-write ${replyId}
+write ${sourceOutputEstId}
 write [0x00 0x02 0x00 0x00]
 write flush
 
 read [0x00 0x00 0x00 0x02]
-read ${replyId}
+read ${sourceOutputEstId}
 read [0x02]
 read [0x82 0x00]
 read [0x00]
 
 write [0x40 0x00 0x00 0x02]
-write ${replyId}
+write ${sourceOutputEstId}
 write [0x08 0x00 0x00 0x00]
 write flush
 
