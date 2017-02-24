@@ -32,7 +32,6 @@ read [0x06] "source"
 read  ([0..8]:sourceInputRefRG010001N)
 read [0x06] "target"
 read ([0..8]:targetInputRefRG010001N)
-read [0x0d]
 read [0x0c] "sub-protocol"
 
 write [0x40 0x00 0x00 0x02]

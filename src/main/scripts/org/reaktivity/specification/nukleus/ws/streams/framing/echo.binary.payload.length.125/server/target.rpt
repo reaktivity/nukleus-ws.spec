@@ -31,7 +31,6 @@ read [0x00 0x00 0x00 0x01]
 read ([0..8]:targetInputId)
 read ([0..8]:targetInputRef)
 read ([0..8]:targetCorrelationId)
-read [0x00]
 
 read notify WS_BEGIN_INPUT_RECEIVED
 
@@ -42,8 +41,8 @@ write flush
 
 read [0x00 0x00 0x00 0x02]
 read ${targetInputId}
-read [0x7d] ([0..125] :server125)
-read [0x01]
+read [0x00 0x7d]
+read ([0..125] :server125)
 read [0x82]
 
 read notify WS_DATA_INPUT_RECEIVED
@@ -68,7 +67,6 @@ write [0x00 0x00 0x00 0x01]
 write ${newTargetOutputEstId}
 write [0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00]
 write ${targetCorrelationId}
-write [0x00]
 write flush
 
 read [0x40 0x00 0x00 0x02]
@@ -79,8 +77,8 @@ write await WS_DATA_INPUT_RECEIVED
 
 write [0x00 0x00 0x00 0x02]
 write ${newTargetOutputEstId}
-write [0x7d] ${server125}
-write [0x01]
+write [0x00 0x7d]
+write ${server125}
 write [0x82]
 write flush
 

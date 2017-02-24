@@ -34,7 +34,6 @@ write [0x06] "source"
 write ${newSourceOutputRef}
 write [0x06] "target"
 write ${newTargetOutputRef}
-write [0x0d]
 write [0x0c] "sub-protocol"
 write flush
 
