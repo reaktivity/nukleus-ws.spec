@@ -15,7 +15,14 @@
 #
 
 property location 'http://localhost:8080/path?query'
-connect ${location}
+property newSourceInputRef  ${nuklei:newReferenceId()} # external
+
+connect await ROUTED_INPUT
+        ${location}
+  option http:transport "nukleus://ws/streams/source"
+  option nukleus:route ${newSourceInputRef}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
 connected
 
 write http:method "GET"

@@ -14,7 +14,7 @@
 # under the License.
 #
 
-property location 'http://localhost:8080/path?query'
+property location 'http://localhost:8080/echo'
 property newSourceInputRef  ${nuklei:newReferenceId()} # external
 property serverConnect "nukleus://target/streams/ws#source"
 
@@ -40,4 +40,6 @@ write nukleus:begin.ext [0x00] [0x14] "sec-websocket-accept" [0x10] ${ws:handsha
 
 connected
 
-# connection established
+read ([0..125] :server125)
+
+write ${server125}

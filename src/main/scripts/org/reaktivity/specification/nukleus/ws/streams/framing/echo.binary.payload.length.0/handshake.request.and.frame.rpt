@@ -14,7 +14,9 @@
 # under the License.
 #
 
-property location 'http://localhost:8080/path?query'
+property location 'http://localhost:8080/echo'
+property key ${ws:handshakeKey()}
+property writeMask ${ws:randomBytes(4)}
 property newSourceInputRef  ${nuklei:newReferenceId()} # external
 
 connect "nukleus://ws/streams/source"
@@ -28,7 +30,7 @@ write nukleus:begin.ext [0x00] [0x05] ":path" [0x0b] "/path?query"
 write nukleus:begin.ext [0x00] [0x0a] ":authority" [0x0e] "localhost:8080"
 write nukleus:begin.ext [0x00] [0x07] "upgrade" [0x09] "websocket"
 write nukleus:begin.ext [0x00] [0x0a] "connection" [0x07] "Upgrade"
-write nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0x10] "dGhlIHNhbXBsZSBub25jZQ=="
+write nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0x10] ${key}
 write nukleus:begin.ext [0x00] [0x15] "sec-websocket-version" [0x02] "13"
 
 read nukleus:begin.ext [0x00] [0x07] ":status" [0x03] "101"
@@ -38,4 +40,5 @@ read nukleus:begin.ext [0x00] [0x14] "sec-websocket-accept" [0x10] ${ws:handshak
 
 connected
 
-# connection established
+
+

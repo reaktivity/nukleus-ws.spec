@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 import org.reaktivity.specification.nukleus.NukleusRule;
@@ -40,26 +41,18 @@ public class OpeningHandshakeIT
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
     private final NukleusRule nukleus = new NukleusRule()
-            .directory("target/nukleus-itests")
-            .streams("ws", "source")
-            .streams("target", "ws#source")
-            .streams("ws", "target")
-            .streams("source", "ws#target");
+        .directory("target/nukleus-itests");
 
     @Rule
     public final TestRule chain = outerRule(nukleus).around(k3po).around(timeout);
 
     @Test
     @Specification({
-//        "${ws}/connection.established/request",
-        "${streams}/connection.established/server/source",
-        "${streams}/connection.established/server/nukleus",
-        "${streams}/connection.established/server/target" })
+        "${streams}/connection.established/handshake.request",
+        "${streams}/connection.established/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnection() throws Exception
     {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_INPUT");
-        k3po.notifyBarrier("ROUTED_OUTPUT");
         k3po.finish();
     }
 

@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
@@ -43,8 +44,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.0/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.0/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength0() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_INPUT");
         k3po.finish();
     }
 
@@ -52,10 +56,15 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.125/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.125/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength125() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_INPUT");
         k3po.finish();
     }
+
+    // TODO: get the rest of the tests to run using nukleus transport
 
     @Test
     @Specification({

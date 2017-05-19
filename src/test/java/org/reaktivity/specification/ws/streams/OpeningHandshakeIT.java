@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
@@ -44,10 +45,15 @@ public class OpeningHandshakeIT
     @Specification({
         "${streams}/connection.established/handshake.request",
         "${streams}/connection.established/handshake.response" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnection() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_INPUT");
         k3po.finish();
     }
+
+    // TODO: get the rest of the tests to run using nukleus transport
 
     @Test
     @Specification({

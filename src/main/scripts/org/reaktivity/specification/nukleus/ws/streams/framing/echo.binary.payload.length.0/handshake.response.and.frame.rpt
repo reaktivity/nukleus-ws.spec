@@ -14,28 +14,29 @@
 # under the License.
 #
 
-property location 'http://localhost:8080/path?query'
+property location 'http://localhost:8080/echo'
 property newSourceInputRef  ${nuklei:newReferenceId()} # external
+property serverConnect "nukleus://target/streams/ws#source"
 
-connect "nukleus://ws/streams/source"
-  option nukleus:route ${newSourceInputRef}
+accept ${serverConnect}
+  option nukleus:route  ${newSourceInputRef}
   option nukleus:window 8192
   option nukleus:transmission "duplex"
+accepted
 
-write nukleus:begin.ext [0x00] [0x07] ":scheme" [0x04] "http"
-write nukleus:begin.ext [0x00] [0x07] ":method" [0x03] "GET"
-write nukleus:begin.ext [0x00] [0x05] ":path" [0x0b] "/path?query"
-write nukleus:begin.ext [0x00] [0x0a] ":authority" [0x0e] "localhost:8080"
-write nukleus:begin.ext [0x00] [0x07] "upgrade" [0x09] "websocket"
-write nukleus:begin.ext [0x00] [0x0a] "connection" [0x07] "Upgrade"
-write nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0x10] "dGhlIHNhbXBsZSBub25jZQ=="
-write nukleus:begin.ext [0x00] [0x15] "sec-websocket-version" [0x02] "13"
-
-read nukleus:begin.ext [0x00] [0x07] ":status" [0x03] "101"
+read nukleus:begin.ext [0x00] [0x07] ":scheme" [0x04] "http"
+read nukleus:begin.ext [0x00] [0x07] ":method" [0x03] "GET"
+read nukleus:begin.ext [0x00] [0x05] ":path" [0x0b] "/path?query"
+read nukleus:begin.ext [0x00] [0x0a] ":authority" [0x0e] "localhost:8080"
 read nukleus:begin.ext [0x00] [0x07] "upgrade" [0x09] /(?i:websocket)/
 read nukleus:begin.ext [0x00] [0x0a] "connection" [0x07] /(?i:Upgrade)/
-read nukleus:begin.ext [0x00] [0x14] "sec-websocket-accept" [0x10] ${ws:handshakeHash(key)}
+read nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0x10] /(?<key>[a-zA-Z0-9+\/=]{24})/
+read nukleus:begin.ext [0x00] [0x15] "sec-websocket-version" [0x02] "13"
+
+write nukleus:begin.ext [0x00] [0x07] ":status" [0x03] "101"
+write nukleus:begin.ext [0x00] [0x07] "upgrade" [0x09] "websocket"
+write nukleus:begin.ext [0x00] [0x0a] "connection" [0x07] "Upgrade"
+write nukleus:begin.ext [0x00] [0x14] "sec-websocket-accept" [0x10] ${ws:handshakeHash(key)}
 
 connected
 
-# connection established
