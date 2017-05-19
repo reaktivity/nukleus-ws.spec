@@ -18,6 +18,7 @@ package org.reaktivity.specification.nukleus.ws.streams;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.rules.RuleChain.outerRule;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
@@ -72,6 +73,8 @@ public class BaseFramingIT
     @Specification({
         "${wsspec}/echo.binary.payload.length.126/handshake.request.and.frame",
         "${wsspec}/echo.binary.payload.length.126/handshake.response.and.frame" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @Ignore("High Level script not yet completed")
     public void shouldEchoBinaryFrameWithPayloadLength126() throws Exception
     {
         k3po.finish();
