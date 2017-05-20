@@ -30,7 +30,7 @@ connect await ROUTED_INPUT
 
 write nukleus:begin.ext [0x00] [0x07] ":scheme" [0x04] "http"
 write nukleus:begin.ext [0x00] [0x07] ":method" [0x03] "GET"
-write nukleus:begin.ext [0x00] [0x05] ":path" [0x05] "/echo"
+write nukleus:begin.ext [0x00] [0x05] ":path" [0x0b] "/path?query"
 write nukleus:begin.ext [0x00] [0x0a] ":authority" [0x0e] "localhost:8080"
 write nukleus:begin.ext [0x00] [0x07] "upgrade" [0x09] "websocket"
 write nukleus:begin.ext [0x00] [0x0a] "connection" [0x07] "upgrade"

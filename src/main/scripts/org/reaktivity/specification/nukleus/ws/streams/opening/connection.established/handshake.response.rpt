@@ -15,11 +15,10 @@
 #
 
 property location 'http://localhost:8080/path?query'
-property newSourceInputRef  ${nuklei:newReferenceId()} # external
 property serverConnect "nukleus://target/streams/ws#source"
 
 accept ${serverConnect}
-  option nukleus:route  ${newSourceInputRef}
+  option nukleus:route  ${newTargetInputRef}
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 accepted

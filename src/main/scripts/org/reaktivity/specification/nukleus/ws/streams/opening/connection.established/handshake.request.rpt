@@ -14,7 +14,8 @@
 # under the License.
 #
 
-property newSourceInputRef  ${nuklei:newReferenceId()} # external
+property newSourceInputRef ${nuklei:newReferenceId()} # external
+property newTargetInputRef ${newSourceInputRef} # external
 
 connect "nukleus://ws/streams/source"
   option nukleus:route ${newSourceInputRef}
