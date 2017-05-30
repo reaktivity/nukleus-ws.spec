@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package org.reaktivity.specification.nukleus.ws.streams;
+package org.reaktivity.specification.ws.streams;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.rules.RuleChain.outerRule;
@@ -32,7 +32,7 @@ import org.kaazing.k3po.junit.rules.K3poRule;
 public class DataFramingIT
 {
     private final K3poRule k3po = new K3poRule()
-            .setScriptRoot("org/reaktivity/specification/nukleus/ws/streams/data");
+            .setScriptRoot("org/reaktivity/specification/ws/data");
 
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
