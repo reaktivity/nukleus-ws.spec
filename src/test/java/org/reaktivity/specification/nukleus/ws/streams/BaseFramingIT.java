@@ -52,6 +52,8 @@ public class BaseFramingIT
     @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength0() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -62,6 +64,8 @@ public class BaseFramingIT
     @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength125() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
