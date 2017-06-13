@@ -99,7 +99,20 @@ public class OpeningHandshakeIT
     @Specification({
         "${streams}/request.header.sec.websocket.protocol/handshake.request",
         "${streams}/request.header.sec.websocket.protocol/handshake.response" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithRequestHeaderSecWebSocketProtocol()
+            throws Exception
+    {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "${streams}/request.header.sec.websocket.protocol.negotiated/handshake.request",
+        "${streams}/request.header.sec.websocket.protocol.negotiated/handshake.response" })
+    public void shouldEstablishConnectionWithRequestHeaderSecWebSocketProtocolNegotiated()
             throws Exception
     {
         k3po.finish();

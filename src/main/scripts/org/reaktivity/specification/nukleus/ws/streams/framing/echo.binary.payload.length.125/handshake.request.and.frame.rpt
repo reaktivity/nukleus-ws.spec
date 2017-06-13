@@ -14,7 +14,6 @@
 # under the License.
 #
 
-property location 'http://localhost:8080/echo'
 property key ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
 property client125 ${ws:randomBytes(125)}
