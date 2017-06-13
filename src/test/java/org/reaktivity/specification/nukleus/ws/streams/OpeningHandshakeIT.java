@@ -36,7 +36,7 @@ public class OpeningHandshakeIT
 {
     private final K3poRule k3po = new K3poRule()
             .addScriptRoot("streams", "org/reaktivity/specification/nukleus/ws/streams/opening")
-            .addScriptRoot("wsspec", "org/reaktivity/specification/ws/opening");
+            .addScriptRoot("spec", "org/reaktivity/specification/ws/opening");
 
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
@@ -59,12 +59,12 @@ public class OpeningHandshakeIT
     }
 
     // TODO: make high-level (cooked) versions of scripts for the tests below
-    // and change wsspec to streams
+    // and change spec to streams
 
     @Test
     @Specification({
-        "${wsspec}/request.header.cookie/handshake.request",
-        "${wsspec}/request.header.cookie/handshake.response" })
+        "${spec}/request.header.cookie/handshake.request",
+        "${spec}/request.header.cookie/handshake.response" })
     public void shouldEstablishConnectionWithCookieRequestHeader()
             throws Exception
     {
@@ -73,8 +73,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.headers.random.case/handshake.request",
-        "${wsspec}/request.headers.random.case/handshake.response" })
+        "${spec}/request.headers.random.case/handshake.request",
+        "${spec}/request.headers.random.case/handshake.response" })
     public void shouldEstablishConnectionWithRandomCaseRequestHeaders()
             throws Exception
     {
@@ -83,8 +83,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.headers.random.case/handshake.request",
-        "${wsspec}/response.headers.random.case/handshake.response" })
+        "${spec}/response.headers.random.case/handshake.request",
+        "${spec}/response.headers.random.case/handshake.response" })
     public void shouldEstablishConnectionWithRandomCaseResponseHeaders()
             throws Exception
     {
@@ -93,8 +93,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.origin/handshake.request",
-        "${wsspec}/request.header.origin/handshake.response" })
+        "${spec}/request.header.origin/handshake.request",
+        "${spec}/request.header.origin/handshake.response" })
     public void shouldEstablishConnectionWithRequestHeaderOrigin()
             throws Exception
     {
@@ -116,8 +116,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.sec.websocket.protocol.negotiated/handshake.request",
-        "${wsspec}/request.header.sec.websocket.protocol.negotiated/handshake.response" })
+        "${spec}/request.header.sec.websocket.protocol.negotiated/handshake.request",
+        "${spec}/request.header.sec.websocket.protocol.negotiated/handshake.response" })
     public void shouldEstablishConnectionWithRequestHeaderSecWebSocketProtocolNegotiated()
             throws Exception
     {
@@ -126,8 +126,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.sec.websocket.extensions/handshake.request",
-        "${wsspec}/request.header.sec.websocket.extensions/handshake.response" })
+        "${spec}/request.header.sec.websocket.extensions/handshake.request",
+        "${spec}/request.header.sec.websocket.extensions/handshake.response" })
     public void shouldEstablishConnectionWithRequestHeaderSecWebSocketExtensions()
             throws Exception
     {
@@ -136,8 +136,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.sec.websocket.extensions.partial.agreement/handshake.request",
-        "${wsspec}/response.header.sec.websocket.extensions.partial.agreement/handshake.response" })
+        "${spec}/response.header.sec.websocket.extensions.partial.agreement/handshake.request",
+        "${spec}/response.header.sec.websocket.extensions.partial.agreement/handshake.response" })
     public void shouldEstablishConnectionWithSomeExtensionsNegotiated()
             throws Exception
     {
@@ -146,8 +146,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.sec.websocket.extensions.reordered/handshake.request",
-        "${wsspec}/response.header.sec.websocket.extensions.reordered/handshake.response" })
+        "${spec}/response.header.sec.websocket.extensions.reordered/handshake.request",
+        "${spec}/response.header.sec.websocket.extensions.reordered/handshake.response" })
     public void shouldEstablishConnectionWhenOrderOfExtensionsNegotiatedChanged()
             throws Exception
     {
@@ -156,8 +156,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.method.not.get/handshake.request",
-        "${wsspec}/request.method.not.get/handshake.response" })
+        "${spec}/request.method.not.get/handshake.request",
+        "${spec}/request.method.not.get/handshake.response" })
     public void shouldFailHandshakeWhenMethodNotGet() throws Exception
     {
         k3po.finish();
@@ -165,8 +165,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.version.not.http.1.1/handshake.request",
-        "${wsspec}/request.version.not.http.1.1/handshake.response" })
+        "${spec}/request.version.not.http.1.1/handshake.request",
+        "${spec}/request.version.not.http.1.1/handshake.response" })
     public void shouldFailHandshakeWhenVersionNotHttp11() throws Exception
     {
         k3po.finish();
@@ -174,8 +174,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.host.missing/handshake.request",
-        "${wsspec}/request.header.host.missing/handshake.response" })
+        "${spec}/request.header.host.missing/handshake.request",
+        "${spec}/request.header.host.missing/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderHostMissing()
             throws Exception
     {
@@ -184,8 +184,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.upgrade.missing/handshake.request",
-        "${wsspec}/request.header.upgrade.missing/handshake.response" })
+        "${spec}/request.header.upgrade.missing/handshake.request",
+        "${spec}/request.header.upgrade.missing/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderUpgradeMissing()
             throws Exception
     {
@@ -194,8 +194,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.upgrade.not.websocket/handshake.request",
-        "${wsspec}/request.header.upgrade.not.websocket/handshake.response" })
+        "${spec}/request.header.upgrade.not.websocket/handshake.request",
+        "${spec}/request.header.upgrade.not.websocket/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderUpgradeNotWebSocket()
             throws Exception
     {
@@ -204,8 +204,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.connection.missing/handshake.request",
-        "${wsspec}/request.header.connection.missing/handshake.response" })
+        "${spec}/request.header.connection.missing/handshake.request",
+        "${spec}/request.header.connection.missing/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderConnectionMissing()
             throws Exception
     {
@@ -214,8 +214,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.connection.not.upgrade/handshake.request",
-        "${wsspec}/request.header.connection.not.upgrade/handshake.response" })
+        "${spec}/request.header.connection.not.upgrade/handshake.request",
+        "${spec}/request.header.connection.not.upgrade/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderConnectionNotUpgrade()
             throws Exception
     {
@@ -224,8 +224,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.sec.websocket.key.missing/handshake.request",
-        "${wsspec}/request.header.sec.websocket.key.missing/handshake.response" })
+        "${spec}/request.header.sec.websocket.key.missing/handshake.request",
+        "${spec}/request.header.sec.websocket.key.missing/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderSecWebSocketKeyMissing()
             throws Exception
     {
@@ -234,8 +234,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.sec.websocket.key.not.16bytes.base64/handshake.request",
-        "${wsspec}/request.header.sec.websocket.key.not.16bytes.base64/handshake.response" })
+        "${spec}/request.header.sec.websocket.key.not.16bytes.base64/handshake.request",
+        "${spec}/request.header.sec.websocket.key.not.16bytes.base64/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderSecWebSocketKeyNot16BytesBase64()
             throws Exception
     {
@@ -244,8 +244,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/request.header.sec.websocket.version.not.13/handshake.request",
-        "${wsspec}/request.header.sec.websocket.version.not.13/handshake.response" })
+        "${spec}/request.header.sec.websocket.version.not.13/handshake.request",
+        "${spec}/request.header.sec.websocket.version.not.13/handshake.response" })
     public void shouldFailHandshakeWhenRequestHeaderSecWebSocketVersionNot13()
             throws Exception
     {
@@ -254,8 +254,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.connection.not.upgrade/handshake.request",
-        "${wsspec}/response.header.connection.not.upgrade/handshake.response" })
+        "${spec}/response.header.connection.not.upgrade/handshake.request",
+        "${spec}/response.header.connection.not.upgrade/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderConnectionNotUpgrade()
             throws Exception
     {
@@ -264,8 +264,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.connection.missing/handshake.request",
-        "${wsspec}/response.header.connection.missing/handshake.response" })
+        "${spec}/response.header.connection.missing/handshake.request",
+        "${spec}/response.header.connection.missing/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderConnectionMissing()
             throws Exception
     {
@@ -274,8 +274,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.upgrade.not.websocket/handshake.request",
-        "${wsspec}/response.header.upgrade.not.websocket/handshake.response" })
+        "${spec}/response.header.upgrade.not.websocket/handshake.request",
+        "${spec}/response.header.upgrade.not.websocket/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderUpgradeNotWebSocket()
             throws Exception
     {
@@ -284,8 +284,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.upgrade.missing/handshake.request",
-        "${wsspec}/response.header.upgrade.missing/handshake.response" })
+        "${spec}/response.header.upgrade.missing/handshake.request",
+        "${spec}/response.header.upgrade.missing/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderUpgradeMissing()
             throws Exception
     {
@@ -294,8 +294,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.sec.websocket.accept.not.hashed/handshake.request",
-        "${wsspec}/response.header.sec.websocket.accept.not.hashed/handshake.response" })
+        "${spec}/response.header.sec.websocket.accept.not.hashed/handshake.request",
+        "${spec}/response.header.sec.websocket.accept.not.hashed/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketAcceptNotHashed()
             throws Exception
     {
@@ -304,8 +304,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.sec.websocket.accept.missing/handshake.request",
-        "${wsspec}/response.header.sec.websocket.accept.missing/handshake.response" })
+        "${spec}/response.header.sec.websocket.accept.missing/handshake.request",
+        "${spec}/response.header.sec.websocket.accept.missing/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketAcceptMissing()
             throws Exception
     {
@@ -314,8 +314,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.sec.websocket.extensions.not.negotiated/handshake.request",
-        "${wsspec}/response.header.sec.websocket.extensions.not.negotiated/handshake.response" })
+        "${spec}/response.header.sec.websocket.extensions.not.negotiated/handshake.request",
+        "${spec}/response.header.sec.websocket.extensions.not.negotiated/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketExtensionsNotNegotiated()
             throws Exception
     {
@@ -324,8 +324,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/response.header.sec.websocket.protocol.not.negotiated/handshake.request",
-        "${wsspec}/response.header.sec.websocket.protocol.not.negotiated/handshake.response" })
+        "${spec}/response.header.sec.websocket.protocol.not.negotiated/handshake.request",
+        "${spec}/response.header.sec.websocket.protocol.not.negotiated/handshake.response" })
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketProtocolNotNegotiated()
             throws Exception
     {
@@ -334,8 +334,8 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${wsspec}/multiple.connections.established/handshake.requests",
-        "${wsspec}/multiple.connections.established/handshake.responses" })
+        "${spec}/multiple.connections.established/handshake.requests",
+        "${spec}/multiple.connections.established/handshake.responses" })
     public void shouldEstablishMultipleConnections() throws Exception
     {
         k3po.finish();
