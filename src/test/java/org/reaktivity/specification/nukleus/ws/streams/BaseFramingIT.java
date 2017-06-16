@@ -77,9 +77,10 @@ public class BaseFramingIT
         "${streams}/echo.binary.payload.length.126/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.126/handshake.response.and.frame" })
     @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
-    @Ignore("High Level script not yet completed")
     public void shouldEchoBinaryFrameWithPayloadLength126() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -107,9 +108,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.65535/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.65535/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength65535() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
