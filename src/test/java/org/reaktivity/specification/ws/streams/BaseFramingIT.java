@@ -70,8 +70,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.126/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.126/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength126() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -97,8 +100,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.65535/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.65535/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength65535() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
