@@ -23,7 +23,7 @@ property serverTransport "nukleus://target/streams/ws#source"
 
 accept ${serverTransport}
   option nukleus:route  ${newServerAcceptRef}
-  option nukleus:window 8192
+  option nukleus:window 66666
   option nukleus:transmission "duplex"
 accepted
 
