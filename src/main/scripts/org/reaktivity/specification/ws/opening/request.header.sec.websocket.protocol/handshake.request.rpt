@@ -17,9 +17,7 @@
 # TODO: revert this script to use k3po http transport as in k3po http specification once k3po
 #       is enhanced to support manifesting this as high-level http
 
-property location 'http://localhost:8080/echo'
 property newHandshakeKey ${ws:handshakeKey()}
-property writeMask ${ws:randomBytes(4)}
 property newServerAcceptRef  ${nuklei:newReferenceId()} # external
 
 connect await ROUTED_SERVER
@@ -45,8 +43,5 @@ read nukleus:begin.ext [0x00] [0x14] "sec-websocket-accept" [0x1c] ${ws:handshak
 read nukleus:begin.ext [0x00] [0x16] "sec-websocket-protocol" [0x07] "primary"
 
 connected
-
-# connection established
-
 
 # connection established

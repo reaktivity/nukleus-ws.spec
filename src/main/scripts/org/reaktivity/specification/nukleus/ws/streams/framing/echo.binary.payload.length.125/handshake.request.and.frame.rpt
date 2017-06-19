@@ -15,7 +15,6 @@
 #
 
 property key ${ws:handshakeKey()}
-property writeMask ${ws:randomBytes(4)}
 property client125 ${ws:randomBytes(125)}
 property newServerAcceptRef ${nuklei:newReferenceId()} # external
 

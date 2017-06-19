@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
@@ -43,9 +44,12 @@ public class MaskingIT
     @Specification({
         "server.send.masked.text/handshake.request.and.frame",
         "server.send.masked.text/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenServerSendsMaskWithTextFrame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -53,9 +57,12 @@ public class MaskingIT
     @Specification({
         "server.send.masked.binary/handshake.request.and.frame",
         "server.send.masked.binary/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenServerSendsMaskWithBinaryFrame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -63,9 +70,12 @@ public class MaskingIT
     @Specification({
         "send.text.payload.not.masked/handshake.request.and.frame",
         "send.text.payload.not.masked/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenSendTextFrameNotMasked()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -73,9 +83,12 @@ public class MaskingIT
     @Specification({
         "send.binary.payload.not.masked/handshake.request.and.frame",
         "send.binary.payload.not.masked/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenSendBinaryFrameNotMasked()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 }

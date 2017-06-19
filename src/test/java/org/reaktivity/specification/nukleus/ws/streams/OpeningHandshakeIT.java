@@ -35,8 +35,7 @@ import org.reaktivity.specification.nukleus.NukleusRule;
 public class OpeningHandshakeIT
 {
     private final K3poRule k3po = new K3poRule()
-            .addScriptRoot("streams", "org/reaktivity/specification/nukleus/ws/streams/opening")
-            .addScriptRoot("spec", "org/reaktivity/specification/ws/opening");
+            .addScriptRoot("streams", "org/reaktivity/specification/nukleus/ws/streams/opening");
 
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
@@ -58,46 +57,55 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
-    // TODO: make high-level (cooked) versions of scripts for the tests below
-    // and change spec to streams
-
     @Test
     @Specification({
-        "${spec}/request.header.cookie/handshake.request",
-        "${spec}/request.header.cookie/handshake.response" })
+        "${streams}/request.header.cookie/handshake.request",
+        "${streams}/request.header.cookie/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithCookieRequestHeader()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.headers.random.case/handshake.request",
-        "${spec}/request.headers.random.case/handshake.response" })
+        "${streams}/request.headers.random.case/handshake.request",
+        "${streams}/request.headers.random.case/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithRandomCaseRequestHeaders()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.headers.random.case/handshake.request",
-        "${spec}/response.headers.random.case/handshake.response" })
+        "${streams}/response.headers.random.case/handshake.request",
+        "${streams}/response.headers.random.case/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithRandomCaseResponseHeaders()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.origin/handshake.request",
-        "${spec}/request.header.origin/handshake.response" })
+        "${streams}/request.header.origin/handshake.request",
+        "${streams}/request.header.origin/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithRequestHeaderOrigin()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -116,228 +124,297 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${spec}/request.header.sec.websocket.protocol.negotiated/handshake.request",
-        "${spec}/request.header.sec.websocket.protocol.negotiated/handshake.response" })
+        "${streams}/request.header.sec.websocket.protocol.negotiated/handshake.request",
+        "${streams}/request.header.sec.websocket.protocol.negotiated/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithRequestHeaderSecWebSocketProtocolNegotiated()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.sec.websocket.extensions/handshake.request",
-        "${spec}/request.header.sec.websocket.extensions/handshake.response" })
+        "${streams}/request.header.sec.websocket.extensions/handshake.request",
+        "${streams}/request.header.sec.websocket.extensions/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithRequestHeaderSecWebSocketExtensions()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.sec.websocket.extensions.partial.agreement/handshake.request",
-        "${spec}/response.header.sec.websocket.extensions.partial.agreement/handshake.response" })
+        "${streams}/response.header.sec.websocket.extensions.partial.agreement/handshake.request",
+        "${streams}/response.header.sec.websocket.extensions.partial.agreement/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWithSomeExtensionsNegotiated()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.sec.websocket.extensions.reordered/handshake.request",
-        "${spec}/response.header.sec.websocket.extensions.reordered/handshake.response" })
+        "${streams}/response.header.sec.websocket.extensions.reordered/handshake.request",
+        "${streams}/response.header.sec.websocket.extensions.reordered/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishConnectionWhenOrderOfExtensionsNegotiatedChanged()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.method.not.get/handshake.request",
-        "${spec}/request.method.not.get/handshake.response" })
+        "${streams}/request.method.not.get/handshake.request",
+        "${streams}/request.method.not.get/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenMethodNotGet() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.version.not.http.1.1/handshake.request",
-        "${spec}/request.version.not.http.1.1/handshake.response" })
+        "${streams}/request.version.not.http.1.1/handshake.request",
+        "${streams}/request.version.not.http.1.1/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenVersionNotHttp11() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.host.missing/handshake.request",
-        "${spec}/request.header.host.missing/handshake.response" })
+        "${streams}/request.header.host.missing/handshake.request",
+        "${streams}/request.header.host.missing/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderHostMissing()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.upgrade.missing/handshake.request",
-        "${spec}/request.header.upgrade.missing/handshake.response" })
+        "${streams}/request.header.upgrade.missing/handshake.request",
+        "${streams}/request.header.upgrade.missing/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderUpgradeMissing()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.upgrade.not.websocket/handshake.request",
-        "${spec}/request.header.upgrade.not.websocket/handshake.response" })
+        "${streams}/request.header.upgrade.not.websocket/handshake.request",
+        "${streams}/request.header.upgrade.not.websocket/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderUpgradeNotWebSocket()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.connection.missing/handshake.request",
-        "${spec}/request.header.connection.missing/handshake.response" })
+        "${streams}/request.header.connection.missing/handshake.request",
+        "${streams}/request.header.connection.missing/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderConnectionMissing()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.connection.not.upgrade/handshake.request",
-        "${spec}/request.header.connection.not.upgrade/handshake.response" })
+        "${streams}/request.header.connection.not.upgrade/handshake.request",
+        "${streams}/request.header.connection.not.upgrade/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderConnectionNotUpgrade()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.sec.websocket.key.missing/handshake.request",
-        "${spec}/request.header.sec.websocket.key.missing/handshake.response" })
+        "${streams}/request.header.sec.websocket.key.missing/handshake.request",
+        "${streams}/request.header.sec.websocket.key.missing/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderSecWebSocketKeyMissing()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.sec.websocket.key.not.16bytes.base64/handshake.request",
-        "${spec}/request.header.sec.websocket.key.not.16bytes.base64/handshake.response" })
+        "${streams}/request.header.sec.websocket.key.not.16bytes.base64/handshake.request",
+        "${streams}/request.header.sec.websocket.key.not.16bytes.base64/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderSecWebSocketKeyNot16BytesBase64()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/request.header.sec.websocket.version.not.13/handshake.request",
-        "${spec}/request.header.sec.websocket.version.not.13/handshake.response" })
+        "${streams}/request.header.sec.websocket.version.not.13/handshake.request",
+        "${streams}/request.header.sec.websocket.version.not.13/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailHandshakeWhenRequestHeaderSecWebSocketVersionNot13()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.connection.not.upgrade/handshake.request",
-        "${spec}/response.header.connection.not.upgrade/handshake.response" })
+        "${streams}/response.header.connection.not.upgrade/handshake.request",
+        "${streams}/response.header.connection.not.upgrade/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderConnectionNotUpgrade()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.connection.missing/handshake.request",
-        "${spec}/response.header.connection.missing/handshake.response" })
+        "${streams}/response.header.connection.missing/handshake.request",
+        "${streams}/response.header.connection.missing/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderConnectionMissing()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.upgrade.not.websocket/handshake.request",
-        "${spec}/response.header.upgrade.not.websocket/handshake.response" })
+        "${streams}/response.header.upgrade.not.websocket/handshake.request",
+        "${streams}/response.header.upgrade.not.websocket/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderUpgradeNotWebSocket()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.upgrade.missing/handshake.request",
-        "${spec}/response.header.upgrade.missing/handshake.response" })
+        "${streams}/response.header.upgrade.missing/handshake.request",
+        "${streams}/response.header.upgrade.missing/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderUpgradeMissing()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.sec.websocket.accept.not.hashed/handshake.request",
-        "${spec}/response.header.sec.websocket.accept.not.hashed/handshake.response" })
+        "${streams}/response.header.sec.websocket.accept.not.hashed/handshake.request",
+        "${streams}/response.header.sec.websocket.accept.not.hashed/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketAcceptNotHashed()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.sec.websocket.accept.missing/handshake.request",
-        "${spec}/response.header.sec.websocket.accept.missing/handshake.response" })
+        "${streams}/response.header.sec.websocket.accept.missing/handshake.request",
+        "${streams}/response.header.sec.websocket.accept.missing/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketAcceptMissing()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.sec.websocket.extensions.not.negotiated/handshake.request",
-        "${spec}/response.header.sec.websocket.extensions.not.negotiated/handshake.response" })
+        "${streams}/response.header.sec.websocket.extensions.not.negotiated/handshake.request",
+        "${streams}/response.header.sec.websocket.extensions.not.negotiated/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketExtensionsNotNegotiated()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/response.header.sec.websocket.protocol.not.negotiated/handshake.request",
-        "${spec}/response.header.sec.websocket.protocol.not.negotiated/handshake.response" })
+        "${streams}/response.header.sec.websocket.protocol.not.negotiated/handshake.request",
+        "${streams}/response.header.sec.websocket.protocol.not.negotiated/handshake.response" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldFailConnectionWhenResponseHeaderSecWebSocketProtocolNotNegotiated()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
     @Test
     @Specification({
-        "${spec}/multiple.connections.established/handshake.requests",
-        "${spec}/multiple.connections.established/handshake.responses" })
+        "${streams}/multiple.connections.established/handshake.requests",
+        "${streams}/multiple.connections.established/handshake.responses" })
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEstablishMultipleConnections() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 }
