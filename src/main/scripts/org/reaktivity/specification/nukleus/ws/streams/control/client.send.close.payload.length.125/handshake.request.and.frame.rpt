@@ -25,7 +25,9 @@ connect await ROUTED_SERVER
 
 connected
 
-write [0x03 0xe8] ${client123}
+write nukleus:end.ext [0x00] [0x00 0x00] [0x03 0xe8] [0x7b] ${client123}
+write close
 
-read [0..125]
+read nukleus:end.ext [0x00] [0x00 0x00] [0x03 0xe8] [0x7b] ${client123}
+read closed
 

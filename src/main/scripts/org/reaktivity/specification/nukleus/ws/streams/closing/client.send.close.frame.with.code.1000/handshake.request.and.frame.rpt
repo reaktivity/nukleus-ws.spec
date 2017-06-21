@@ -24,7 +24,7 @@ connect await ROUTED_SERVER
 
 connected
 
-write [0x03 0xe8]
+write nukleus:end.ext [0x03 0xe8]
 
-read [0x03 0xe8]
+read nukleus:end.ext [0x03 0xe8]
 

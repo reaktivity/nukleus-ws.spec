@@ -25,7 +25,15 @@ accepted
 
 connected
 
-read ([0..125] :server125)
+#read nukleus:end.ext [0xe8] [0x03] [0x00]
+#read closed
 
-write ${server125}
+#write nukleus:end.ext [0xe8] [0x03] [0x00]
+#write close
+
+read nukleus:end.ext [0x00] [0x00 0x00] [0x03 0xe8] [0x7b] ([0..123]:client123)
+read closed
+
+write nukleus:end.ext [0x00] [0x00 0x00] [0x03 0xe8] [0x7b] ${client213}
+write close
 
