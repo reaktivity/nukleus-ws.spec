@@ -35,13 +35,13 @@ write nukleus:begin.ext ${http:header(":path", "/echo")}
 write nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
 write nukleus:begin.ext ${http:header("upgrade", "websocket")}
 write nukleus:begin.ext ${http:header("connection", "upgrade")}
-write nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0x18] ${key}
+write nukleus:begin.ext ${http:header("sec-websocket-key", key)}
 write nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
 
 read nukleus:begin.ext ${http:header(":status", "101")}
 read nukleus:begin.ext ${http:header("upgrade", "websocket")}
 read nukleus:begin.ext ${http:header("connection", "upgrade")}
-read nukleus:begin.ext [0x00] [0x14] "sec-websocket-accept" [0x1c] ${ws:handshakeHash(key)}
+read nukleus:begin.ext ${http:header("sec-websocket-accept", ws:handshakeHash(key))}
 
 connected
 
