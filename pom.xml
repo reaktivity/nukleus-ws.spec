@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.reaktivity</groupId>
   <artifactId>nukleus-ws.spec</artifactId>
-  <version>0.8.1</version>
+  <version>0.9</version>
   <name>WebSocket Nukleus Specification</name>
   <description>WebSocket Nukleus Specification</description>
   <url>https://github.com/reaktivity/nukleus-ws.spec</url>
@@ -47,7 +47,8 @@
     <k3po.version>3.0.0-alpha-73</k3po.version>
     <k3po.nukleus.ext.version>0.5.1</k3po.nukleus.ext.version>
     <nukleus.spec.version>0.7</nukleus.spec.version>
-    <nukleus.plugin.version>0.7.8</nukleus.plugin.version>
+    <nukleus-http.spec.version>0.24</nukleus-http.spec.version>
+    <nukleus.plugin.version>0.10</nukleus.plugin.version>
   </properties>
 
   <dependencies>
@@ -75,6 +76,11 @@
       <groupId>org.kaazing</groupId>
       <artifactId>k3po.lang</artifactId>
       <version>${k3po.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.reaktivity</groupId>
+      <artifactId>nukleus-http.spec</artifactId>
+      <version>${nukleus-http.spec.version}</version>
     </dependency>
   </dependencies>
 
