@@ -20,10 +20,11 @@
 property location 'http://localhost:8080/echo'
 property newServerAcceptRef  ${nuklei:newReferenceId()} # external
 property serverTransport "nukleus://target/streams/ws#source"
+property initialWindow 82000  # to allow for 80%
 
 accept ${serverTransport}
   option nukleus:route  ${newServerAcceptRef}
-  option nukleus:window 82000  # to allow for 80%
+  option nukleus:window ${initialWindow}
   option nukleus:transmission "duplex"
 accepted
 
