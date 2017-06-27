@@ -22,7 +22,7 @@ property key ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
 property client65535 ${ws:randomBytes(65535)}
 property newServerAcceptRef  ${nuklei:newReferenceId()} # external
-property initialWindow 82000  # to allow for 80%
+property initialWindow 82000
 
 connect await ROUTED_SERVER
         "nukleus://ws/streams/source"

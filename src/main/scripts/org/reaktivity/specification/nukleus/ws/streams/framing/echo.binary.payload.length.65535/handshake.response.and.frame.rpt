@@ -16,7 +16,7 @@
 
 property newServerAcceptRef ${nuklei:newReferenceId()} # external
 property newServerConnectRef ${newServerAcceptRef} # external
-property initialWindow 82000  # to allow for 80%
+property initialWindow 82000
 
 property serverConnect "nukleus://target/streams/ws#source"
 
