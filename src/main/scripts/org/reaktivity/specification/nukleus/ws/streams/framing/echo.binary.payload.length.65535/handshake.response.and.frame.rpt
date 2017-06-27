@@ -16,12 +16,13 @@
 
 property newServerAcceptRef ${nuklei:newReferenceId()} # external
 property newServerConnectRef ${newServerAcceptRef} # external
+property initialWindow 82000
 
 property serverConnect "nukleus://target/streams/ws#source"
 
 accept ${serverConnect}
   option nukleus:route  ${newServerConnectRef}
-  option nukleus:window 66666
+  option nukleus:window ${initialWindow}
   option nukleus:transmission "duplex"
 accepted
 
