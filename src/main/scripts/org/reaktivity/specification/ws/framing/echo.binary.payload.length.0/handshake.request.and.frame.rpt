@@ -27,6 +27,7 @@ connect await ROUTED_SERVER
   option nukleus:route ${newServerAcceptRef}
   option nukleus:window 8192
   option nukleus:transmission "duplex"
+  option nukleus:throttle "message"
 
 write nukleus:begin.ext ${http:header(":scheme", "http")}
 write nukleus:begin.ext ${http:header(":method", "GET")}
