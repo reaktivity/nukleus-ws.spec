@@ -23,7 +23,6 @@ accept ${serverConnect}
   option nukleus:route  ${newServerConnectRef}
   option nukleus:window 8192
   option nukleus:transmission "duplex"
-  option nukleus:throttle "message"
 accepted
 
 connected

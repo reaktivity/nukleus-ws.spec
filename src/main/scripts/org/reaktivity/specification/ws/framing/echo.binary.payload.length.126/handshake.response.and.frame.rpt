@@ -25,7 +25,6 @@ accept ${serverTransport}
   option nukleus:route  ${newServerAcceptRef}
   option nukleus:window 8192
   option nukleus:transmission "duplex"
-  option nukleus:throttle "message"
 accepted
 
 read nukleus:begin.ext ${http:header(":scheme", "http")}
