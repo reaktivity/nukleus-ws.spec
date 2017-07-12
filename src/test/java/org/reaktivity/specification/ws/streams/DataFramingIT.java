@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
@@ -45,9 +46,12 @@ public class DataFramingIT
     @Specification({
         "client.send.opcode.0x03/handshake.request.and.frame",
         "client.send.opcode.0x03/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenClientSendOpcode3Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -55,9 +59,12 @@ public class DataFramingIT
     @Specification({
         "client.send.opcode.0x04/handshake.request.and.frame",
         "client.send.opcode.0x04/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenClientSendOpcode4Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -65,9 +72,12 @@ public class DataFramingIT
     @Specification({
         "client.send.opcode.0x05/handshake.request.and.frame",
         "client.send.opcode.0x05/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenClientSendOpcode5Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -75,9 +85,12 @@ public class DataFramingIT
     @Specification({
         "client.send.opcode.0x06/handshake.request.and.frame",
         "client.send.opcode.0x06/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenClientSendOpcode6Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -85,9 +98,12 @@ public class DataFramingIT
     @Specification({
         "client.send.opcode.0x07/handshake.request.and.frame",
         "client.send.opcode.0x07/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenClientSendOpcode7Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -95,9 +111,12 @@ public class DataFramingIT
     @Specification({
         "server.send.opcode.0x03/handshake.request.and.frame",
         "server.send.opcode.0x03/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenServerSendOpcode3Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -105,9 +124,12 @@ public class DataFramingIT
     @Specification({
         "server.send.opcode.0x04/handshake.request.and.frame",
         "server.send.opcode.0x04/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenServerSendOpcode4Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -115,9 +137,12 @@ public class DataFramingIT
     @Specification({
         "server.send.opcode.0x05/handshake.request.and.frame",
         "server.send.opcode.0x05/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenServerSendOpcode5Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -125,9 +150,12 @@ public class DataFramingIT
     @Specification({
         "server.send.opcode.0x06/handshake.request.and.frame",
         "server.send.opcode.0x06/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenServerSendOpcode6Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -135,9 +163,12 @@ public class DataFramingIT
     @Specification({
         "server.send.opcode.0x07/handshake.request.and.frame",
         "server.send.opcode.0x07/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenServerSendOpcode7Frame()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 }

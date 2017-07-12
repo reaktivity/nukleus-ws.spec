@@ -17,7 +17,6 @@
 # TODO: revert this script to use k3po http transport as in k3po http specification once k3po
 #       is enhanced to support manifesting this as high-level http
 
-property location 'http://localhost:8080/echo'
 property newServerAcceptRef  ${nuklei:newReferenceId()} # external
 property serverTransport "nukleus://target/streams/ws#source"
 property initialWindow 82000
