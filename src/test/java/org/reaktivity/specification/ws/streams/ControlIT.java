@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
@@ -108,8 +109,11 @@ public class ControlIT
     @Specification({
         "client.send.pong.payload.length.0/handshake.request.and.frame",
         "client.send.pong.payload.length.0/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldReceiveClientPongFrameWithEmptyPayload() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -117,8 +121,11 @@ public class ControlIT
     @Specification({
         "client.send.pong.payload.length.125/handshake.request.and.frame",
         "client.send.pong.payload.length.125/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldReceiveClientPongFrameWithPayload() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -126,9 +133,12 @@ public class ControlIT
     @Specification({
         "client.send.pong.payload.length.126/handshake.request.and.frame",
         "client.send.pong.payload.length.126/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldFailWebSocketConnectionWhenClientSendPongFrameWithPayloadTooLong()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
