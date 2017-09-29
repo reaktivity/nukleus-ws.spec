@@ -14,26 +14,31 @@
 # under the License.
 #
 
-property key ${ws:handshakeKey()}
+property location 'http://localhost:8080/path?query'
+property newHandshakeKey ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
+property newServerAcceptRef  ${nuklei:newReferenceId()} # external
 
-connect "http://localhost:8080/echo"
+connect await ROUTED_SERVER
+        "nukleus://ws/streams/source"
+  option nukleus:route ${newServerAcceptRef}
+  option nukleus:window 8192
+  option nukleus:transmission "half-duplex"
+
+write nukleus:begin.ext ${http:header(":scheme", "http")}
+write nukleus:begin.ext ${http:header(":method", "GET")}
+write nukleus:begin.ext ${http:header(":path", "/path?query")}
+write nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+write nukleus:begin.ext ${http:header("upgrade", "websocket")}
+write nukleus:begin.ext ${http:header("connection", "upgrade")}
+write nukleus:begin.ext ${http:header("sec-websocket-key", newHandshakeKey)}
+write nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
+
 connected
 
-write http:method "GET"
-write http:version "HTTP/1.1"
-write http:host
-write http:header "Upgrade" "websocket"
-write http:header "Connection" "Upgrade"
-write http:header "Sec-WebSocket-Key" ${key}
-write http:header "Sec-WebSocket-Version" "13"
-
-read http:status "101" /.+/
-read http:version "HTTP/1.1"
-read http:header "Upgrade" /(?i:websocket)/
-read http:header "Connection" /(?i:Upgrade)/
-read http:header "Sec-WebSocket-Accept" ${ws:handshakeHash(key)}
+read nukleus:begin.ext ${http:header(":status", "101")}
+read nukleus:begin.ext ${http:header("upgrade", "websocket")}
+read nukleus:begin.ext ${http:header("connection", "upgrade")}
+read nukleus:begin.ext ${http:header("sec-websocket-accept", ws:handshakeHash(newHandshakeKey))}
 
 write [0x8a 0x80] ${writeMask}
-
-closed
