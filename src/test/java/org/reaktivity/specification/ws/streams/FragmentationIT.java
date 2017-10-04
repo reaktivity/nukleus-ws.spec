@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
@@ -173,9 +174,12 @@ public class FragmentationIT
     @Specification({
         "client.echo.binary.payload.length.125.fragmented/handshake.request.and.frames",
         "client.echo.binary.payload.length.125.fragmented/handshake.response.and.frame" })
+    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
     public void shouldEchoClientSendBinaryFrameWithPayloadFragmented()
             throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
