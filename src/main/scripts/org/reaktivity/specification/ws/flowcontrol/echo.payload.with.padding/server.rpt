@@ -1,0 +1,71 @@
+#
+# Copyright 2016-2017 The Reaktivity Project
+#
+# The Reaktivity Project licenses this file to you under the Apache License,
+# version 2.0 (the "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at:
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+
+# TODO: revert this script to use k3po http transport as in k3po http specification once k3po
+#       is enhanced to support manifesting this as high-level http
+
+property location 'http://localhost:8080/echo'
+property newServerAcceptRef  ${nuklei:newReferenceId()} # external
+property serverTransport "nukleus://target/streams/ws#source"
+property initialWindow 82000
+
+accept ${serverTransport}
+  option nukleus:route  ${newServerAcceptRef}
+  option nukleus:window ${initialWindow}
+  option nukleus:transmission "duplex"
+accepted
+
+read nukleus:begin.ext ${http:header(":scheme", "http")}
+read nukleus:begin.ext ${http:header(":method", "GET")}
+read nukleus:begin.ext ${http:header(":path", "/echo")}
+read nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+read nukleus:begin.ext ${http:header("upgrade", "websocket")}
+read nukleus:begin.ext ${http:header("connection", "upgrade")}
+read nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0..2] /(?<key>[a-zA-Z0-9+\/=]{24})/
+read nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
+
+write nukleus:begin.ext ${http:header(":status", "101")}
+write nukleus:begin.ext ${http:header("upgrade", "websocket")}
+write nukleus:begin.ext ${http:header("connection", "upgrade")}
+write nukleus:begin.ext ${http:header("sec-websocket-accept", ws:handshakeHash(key))}
+
+connected
+
+read [0x82 0xfe 0xff 0xff] ([0..4] :readMask)
+read option mask ${readMask}
+read ([0..7178] :part1)
+read ([0..7178] :part2)
+read ([0..7178] :part3)
+read ([0..7178] :part4)
+read ([0..7178] :part5)
+read ([0..7178] :part6)
+read ([0..7178] :part7)
+read ([0..7178] :part8)
+read ([0..7178] :part9)
+read ([0..933] :part10)
+read option mask [0x00 0x00 0x00 0x00]
+
+# 7178 = 8192 - 1000 (padding) - 14 (ws framing)
+write [0x82 0x7e 0x1c 0x0a] ${part1}
+write [0x82 0x7e 0x1c 0x0a] ${part2}
+write [0x82 0x7e 0x1c 0x0a] ${part3}
+write [0x82 0x7e 0x1c 0x0a] ${part4}
+write [0x82 0x7e 0x1c 0x0a] ${part5}
+write [0x82 0x7e 0x1c 0x0a] ${part6}
+write [0x82 0x7e 0x1c 0x0a] ${part7}
+write [0x82 0x7e 0x1c 0x0a] ${part8}
+write [0x82 0x7e 0x1c 0x0a] ${part9}
+write [0x82 0x7e 0x03 0xa5] ${part10}
