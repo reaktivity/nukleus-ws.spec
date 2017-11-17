@@ -14,14 +14,19 @@
 # under the License.
 #
 
-accept "http://localhost:8080/path?query"
+property key ${ws:handshakeKey()}
+property writeMask ${ws:randomBytes(4)}
+property client127 ${ws:randomBytes(127)}
+property newServerAcceptRef ${nuklei:newReferenceId()} # external
 
-accepted
+connect await ROUTED_SERVER
+        "nukleus://ws/streams/source"
+        option nukleus:route ${newServerAcceptRef}
+        option nukleus:window 8192
+        option nukleus:transmission "duplex"
+
 connected
 
-read http:header "Host" missing
-read closed
+write ${client127}
 
-write http:status "400" "Bad Request"
-write http:content-length
-write close
+read ${client127}

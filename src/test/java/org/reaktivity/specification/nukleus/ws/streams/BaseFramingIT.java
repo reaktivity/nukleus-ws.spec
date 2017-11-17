@@ -18,7 +18,6 @@ package org.reaktivity.specification.nukleus.ws.streams;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.rules.RuleChain.outerRule;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
@@ -88,9 +87,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.127/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.127/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength127() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -98,9 +99,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.128/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.128/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength128() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -120,9 +123,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.65536/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.65536/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoBinaryFrameWithPayloadLength65536() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -130,9 +135,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.text.payload.length.0/handshake.request.and.frame",
         "${streams}/echo.text.payload.length.0/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoTextFrameWithPayloadLength0() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -140,9 +147,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.text.payload.length.125/handshake.request.and.frame",
         "${streams}/echo.text.payload.length.125/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoTextFrameWithPayloadLength125() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -150,9 +159,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.text.payload.length.126/handshake.request.and.frame",
         "${streams}/echo.text.payload.length.126/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoTextFrameWithPayloadLength126() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -160,9 +171,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.text.payload.length.127/handshake.request.and.frame",
         "${streams}/echo.text.payload.length.127/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoTextFrameWithPayloadLength127() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -170,9 +183,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.text.payload.length.128/handshake.request.and.frame",
         "${streams}/echo.text.payload.length.128/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoTextFrameWithPayloadLength128() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -180,9 +195,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.text.payload.length.65535/handshake.request.and.frame",
         "${streams}/echo.text.payload.length.65535/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoTextFrameWithPayloadLength65535() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -190,9 +207,11 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.text.payload.length.65536/handshake.request.and.frame",
         "${streams}/echo.text.payload.length.65536/handshake.response.and.frame" })
-    @Ignore("High Level script not yet completed")
+    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
     public void shouldEchoTextFrameWithPayloadLength65536() throws Exception
     {
+        k3po.start();
+        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 }
