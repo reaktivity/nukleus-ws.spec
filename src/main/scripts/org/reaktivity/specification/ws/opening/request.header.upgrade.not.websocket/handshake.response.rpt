@@ -14,14 +14,47 @@
 # under the License.
 #
 
-accept "http://localhost:8080/path?query"
+property location 'http://localhost:8080/path?query'
+property newServerAcceptRef  ${nuklei:newReferenceId()} # external
+property serverTransport "nukleus://target/streams/ws#source"
 
+accept ${serverTransport}
+  option nukleus:route  ${newServerAcceptRef}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
 accepted
+
+#TODO: use regex: /(?!(?i:websocket))/ when it will be available
+read nukleus:begin.ext ${http:header(":scheme", "http")}
+read nukleus:begin.ext ${http:header(":method", "GET")}
+read nukleus:begin.ext ${http:header(":path", "/path?query")}
+read nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+read nukleus:begin.ext ${http:header("upgrade", "Mock1")}
+read nukleus:begin.ext ${http:header("connection", "Upgrade")}
+read nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0..2] /(?<key>[a-zA-Z0-9+\/=]{24})/
+read nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
+
+write nukleus:begin.ext ${http:header(":status", "400 Bad Request")}
+write nukleus:begin.ext ${http:header("content-length", "12")}
+
 connected
 
-read http:header "Upgrade" /(?!(?i:websocket))/
-read closed
+write close
 
-write http:status "400" "Bad Request"
-write http:content-length
+accepted
+
+read nukleus:begin.ext ${http:header(":scheme", "http")}
+read nukleus:begin.ext ${http:header(":method", "GET")}
+read nukleus:begin.ext ${http:header(":path", "/path?query")}
+read nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+read nukleus:begin.ext ${http:header("upgrade", "Mock2")}
+read nukleus:begin.ext ${http:header("connection", "Upgrade")}
+read nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0..2] /(?<key>[a-zA-Z0-9+\/=]{24})/
+read nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
+
+write nukleus:begin.ext ${http:header(":status", "400 Bad Request")}
+write nukleus:begin.ext ${http:header("content-length", "12")}
+
+connected
+
 write close

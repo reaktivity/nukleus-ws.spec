@@ -14,21 +14,47 @@
 # under the License.
 #
 
-accept "http://localhost:8080/path?query"
+property location 'http://localhost:8080/path?query'
+property newServerAcceptRef  ${nuklei:newReferenceId()} # external
+property serverTransport "nukleus://target/streams/ws#source"
 
+accept ${serverTransport}
+  option nukleus:route  ${newServerAcceptRef}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
 accepted
+
+#TODO: use regex: /[a-zA-Z0-9+\/=]{24}/ when it will be available
+read nukleus:begin.ext ${http:header(":scheme", "http")}
+read nukleus:begin.ext ${http:header(":method", "GET")}
+read nukleus:begin.ext ${http:header(":path", "/path?query")}
+read nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+read nukleus:begin.ext ${http:header("upgrade", "websocket")}
+read nukleus:begin.ext ${http:header("connection", "Upgrade")}
+read nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0..2] /(?<key>[a-zA-Z0-9+\/=]{24})/
+read nukleus:begin.ext ${http:header("sec-websocket-version", "10")}
+
+write nukleus:begin.ext ${http:header(":status", "400 Bad Request")}
+write nukleus:begin.ext ${http:header("content-length", "12")}
+
 connected
 
-read http:method "GET"
-read http:version "HTTP/1.1"
-read http:header "Host" "localhost:8080"
-read http:header "Upgrade" /(?i:websocket)/
-read http:header "Connection" /(?i:Upgrade)/
-read http:header "Sec-WebSocket-Key" /[a-zA-Z0-9+\/=]{24}/
-read http:header "Sec-WebSocket-Version" /(?!13)/
-read closed
+write close
 
-write http:status "426" "Upgrade Required"
-write http:header "Sec-WebSocket-Version" "13"
-write http:content-length
+accepted
+
+read nukleus:begin.ext ${http:header(":scheme", "http")}
+read nukleus:begin.ext ${http:header(":method", "GET")}
+read nukleus:begin.ext ${http:header(":path", "/path?query")}
+read nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+read nukleus:begin.ext ${http:header("upgrade", "websocket")}
+read nukleus:begin.ext ${http:header("connection", "Upgrade")}
+read nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0..2] /(?<key>[a-zA-Z0-9+\/=]{24})/
+read nukleus:begin.ext ${http:header("sec-websocket-version", "10")}
+
+write nukleus:begin.ext ${http:header(":status", "400 Bad Request")}
+write nukleus:begin.ext ${http:header("content-length", "12")}
+
+connected
+
 write close

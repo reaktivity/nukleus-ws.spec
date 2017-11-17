@@ -14,19 +14,30 @@
 # under the License.
 #
 
-connect "http://localhost:8080/path?query"
+property location 'http://localhost:8080/echo'
+property newHandshakeKey ${ws:handshakeKey()}
+property writeMask ${ws:randomBytes(4)}
+property newServerAcceptRef  ${nuklei:newReferenceId()} # external
+
+connect await ROUTED_SERVER
+        "nukleus://ws/streams/source"
+  option nukleus:route ${newServerAcceptRef}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
+
+write nukleus:begin.ext ${http:header(":scheme", "http")}
+write nukleus:begin.ext ${http:header(":method", "GET")}
+write nukleus:begin.ext ${http:header(":path", "/path?query")}
+write nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+write nukleus:begin.ext ${http:header("upgrade", "websocket")}
+write nukleus:begin.ext ${http:header("connection", "Upgrade")}
+write nukleus:begin.ext ${http:header("sec-websocket-key", newHandshakeKey)}
+write nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
+
+read nukleus:begin.ext ${http:header(":status", "101")}
+read nukleus:begin.ext ${http:header("upgrade", "websocket")}
+read nukleus:begin.ext ${http:header("sec-websocket-accept", ws:handshakeHash(key))}
+
 connected
 
-write http:method "GET"
-write http:version "HTTP/1.1"
-write http:header "Host" "localhost:8080"
-write http:header "Upgrade" "websocket"
-write http:header "Connection" "Upgrade"
-write http:header "Sec-WebSocket-Key" "dGhlIHNhbXBsZSBub25jZQ=="
-write http:header "Sec-WebSocket-Version" "13"
-
-read http:status "101" /.+/
-read http:version "HTTP/1.1"
-read http:header "Upgrade" /(?i:websocket)/
-read http:header "Connection" missing
-read http:header "Sec-WebSocket-Accept" "s3pPLMBiTxaQ9kYGzzhZRbK+xOo="
+write close

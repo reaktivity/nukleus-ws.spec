@@ -14,38 +14,81 @@
 # under the License.
 #
 
-connect "http://localhost:8080/preflight"
+property location 'http://localhost:8080/path?query'
+property newHandshakeKey ${ws:handshakeKey()}
+property writeMask ${ws:randomBytes(4)}
+property newServerAcceptRef  ${nuklei:newReferenceId()} # external
+
+connect await ROUTED_SERVER
+        "nukleus://ws/streams/source"
+  option nukleus:route ${newServerAcceptRef}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
+
+write nukleus:begin.ext ${http:header(":scheme", "http")}
+write nukleus:begin.ext ${http:header(":method", "GET")}
+
+read nukleus:begin.ext ${http:header(":status","200")}
+read nukleus:begin.ext ${http:header(":set-cookie","SID=31d4d96e407aad42; Domain=.local")}
+
 connected
 
-write http:method "GET"
-write http:version "HTTP/1.1"
-write http:host
-write close
+connect await SET_COOKIE
+        "nukleus://ws/streams/source"
+  option nukleus:route ${newServerAcceptRef}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
 
-read http:status "200" /.+/
-read http:version "HTTP/1.1"
-read http:header "Set-Cookie" "SID=31d4d96e407aad42; Domain=.local"
-read notify SET_COOKIE
-read closed
+write nukleus:begin.ext ${http:header(":scheme", "http")}
+write nukleus:begin.ext ${http:header(":method", "GET")}
+write nukleus:begin.ext ${http:header(":host", "localhost:8080")}
+write nukleus:begin.ext ${http:header(":path", "/path?query")}
+write nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
+write nukleus:begin.ext ${http:header("upgrade", "websocket")}
+write nukleus:begin.ext ${http:header("connection", "upgrade")}
+write nukleus:begin.ext ${http:header("cookie", "SID=31d4d96e407aad42")}
+write nukleus:begin.ext ${http:header("sec-websocket-key", newHandshakeKey)}
+write nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
 
-connect "http://localhost:8080/path?query"
+read nukleus:begin.ext ${http:header(":status", "101")}
+read nukleus:begin.ext ${http:header("upgrade", "websocket")}
+read nukleus:begin.ext ${http:header("connection", "upgrade")}
+read nukleus:begin.ext ${http:header("sec-websocket-accept", ws:handshakeHash(newHandshakeKey))}
+
 connected
 
-write await SET_COOKIE
+#connect "http://localhost:8080/preflight"
+#connected
 
-write http:method "GET"
-write http:version "HTTP/1.1"
-write http:host
-write http:header "Upgrade" "websocket"
-write http:header "Connection" "Upgrade"
-write http:header "Cookie" "SID=31d4d96e407aad42"
-write http:header "Sec-WebSocket-Key" "dGhlIHNhbXBsZSBub25jZQ=="
-write http:header "Sec-WebSocket-Version" "13"
+#write http:method "GET"
+#write http:version "HTTP/1.1"
+#write http:host
+#write close
 
-read http:status "101" /.+/
-read http:version "HTTP/1.1"
-read http:header "Upgrade" /(?i:websocket)/
-read http:header "Connection" /(?i:Upgrade)/
-read http:header "Sec-WebSocket-Accept" "s3pPLMBiTxaQ9kYGzzhZRbK+xOo="
+#read http:status "200" /.+/
+#read http:version "HTTP/1.1"
+#read http:header "Set-Cookie" "SID=31d4d96e407aad42; Domain=.local"
+#read notify SET_COOKIE
+#read closed
+
+#connect "http://localhost:8080/path?query"
+#connected
+
+#write await SET_COOKIE
+
+#write http:method "GET"
+#write http:version "HTTP/1.1"
+#write http:host
+#write http:header "Upgrade" "websocket"
+#write http:header "Connection" "Upgrade"
+#write http:header "Cookie" "SID=31d4d96e407aad42"
+#write http:header "Sec-WebSocket-Key" "dGhlIHNhbXBsZSBub25jZQ=="
+#write http:header "Sec-WebSocket-Version" "13"
+
+#read http:status "101" /.+/
+#read http:version "HTTP/1.1"
+#read http:header "Upgrade" /(?i:websocket)/
+#read http:header "Connection" /(?i:Upgrade)/
+#read http:header "Sec-WebSocket-Accept" "s3pPLMBiTxaQ9kYGzzhZRbK+xOo="
 
 # connection established

@@ -18,6 +18,7 @@ package org.reaktivity.specification.nukleus.ws.streams;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.rules.RuleChain.outerRule;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
@@ -61,6 +62,7 @@ public class OpeningHandshakeIT
     // TODO: make high-level (cooked) versions of scripts for the tests below
     // and change spec to streams
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.cookie/handshake.request",
@@ -71,6 +73,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.headers.random.case/handshake.request",
@@ -81,6 +84,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.headers.random.case/handshake.request",
@@ -91,6 +95,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.origin/handshake.request",
@@ -114,6 +119,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.sec.websocket.protocol.negotiated/handshake.request",
@@ -124,6 +130,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.sec.websocket.extensions/handshake.request",
@@ -134,6 +141,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.sec.websocket.extensions.partial.agreement/handshake.request",
@@ -144,6 +152,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.sec.websocket.extensions.reordered/handshake.request",
@@ -154,6 +163,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.method.not.get/handshake.request",
@@ -163,6 +173,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.version.not.http.1.1/handshake.request",
@@ -172,6 +183,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.host.missing/handshake.request",
@@ -182,6 +194,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.upgrade.missing/handshake.request",
@@ -192,6 +205,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.upgrade.not.websocket/handshake.request",
@@ -202,6 +216,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.connection.missing/handshake.request",
@@ -212,6 +227,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.connection.not.upgrade/handshake.request",
@@ -222,6 +238,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.sec.websocket.key.missing/handshake.request",
@@ -232,6 +249,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.sec.websocket.key.not.16bytes.base64/handshake.request",
@@ -242,6 +260,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/request.header.sec.websocket.version.not.13/handshake.request",
@@ -252,6 +271,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.connection.not.upgrade/handshake.request",
@@ -262,6 +282,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.connection.missing/handshake.request",
@@ -272,6 +293,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.upgrade.not.websocket/handshake.request",
@@ -282,6 +304,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.upgrade.missing/handshake.request",
@@ -292,6 +315,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.sec.websocket.accept.not.hashed/handshake.request",
@@ -302,6 +326,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.sec.websocket.accept.missing/handshake.request",
@@ -312,6 +337,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.sec.websocket.extensions.not.negotiated/handshake.request",
@@ -322,6 +348,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/response.header.sec.websocket.protocol.not.negotiated/handshake.request",
@@ -332,6 +359,7 @@ public class OpeningHandshakeIT
         k3po.finish();
     }
 
+    @Ignore
     @Test
     @Specification({
         "${spec}/multiple.connections.established/handshake.requests",
