@@ -57,4 +57,3 @@ write [0x81 0xfd] ${writeMask}
 write option mask ${writeMask}
 write ${client25a} ${client25b} ${client25c} ${client25d} ${client25e}
 write option mask [0x00 0x00 0x00 0x00]
-
