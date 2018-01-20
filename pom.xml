@@ -52,7 +52,7 @@
 
     <nukleus.plugin.version>0.24</nukleus.plugin.version>
     <nukleus.spec.version>0.15</nukleus.spec.version>
-    <nukleus-http.spec.version>develop-SNAPSHOT</nukleus-http.spec.version>
+    <nukleus-http.spec.version>0.44</nukleus-http.spec.version>
   </properties>
 
   <dependencies>
