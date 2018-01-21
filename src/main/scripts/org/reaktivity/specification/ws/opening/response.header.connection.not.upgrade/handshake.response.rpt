@@ -32,4 +32,3 @@ write http:header "Upgrade" "websocket"
 write http:header "Connection" "Not Upgrade"
 write http:header "Sec-WebSocket-Accept" ${ws:handshakeHash(key)}
 write flush
-
