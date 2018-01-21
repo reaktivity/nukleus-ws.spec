@@ -27,21 +27,24 @@ accept ${serverTransport}
   option nukleus:transmission "duplex"
 accepted
 
-read nukleus:begin.ext ${http:header(":scheme", "http")}
-read nukleus:begin.ext ${http:header(":method", "GET")}
-read nukleus:begin.ext ${http:header(":path", "/path?query")}
-read nukleus:begin.ext ${http:header(":authority", "localhost:8080")}
-read nukleus:begin.ext ${http:header("upgrade", "websocket")}
-read nukleus:begin.ext ${http:header("connection", "upgrade")}
-read nukleus:begin.ext [0x00] [0x11] "sec-websocket-key" [0..2] /(?<key>[a-zA-Z0-9+\/=]{24})/
-read nukleus:begin.ext ${http:header("sec-websocket-version", "13")}
-read nukleus:begin.ext ${http:header("sec-websocket-protocol", "primary")}
+read nukleus:begin.ext [0xdf 0x00 0x00 0x00]
+                       [0x00] [0x07] ":scheme" [0x04 0x00] "http"
+                       [0x00] [0x07] ":method" [0x03 0x00] "GET"
+                       [0x00] [0x05] ":path" [0x0b 0x00] "/path?query"
+                       [0x00] [0x0a] ":authority" [0x0e 0x00] "localhost:8080"
+                       [0x00] [0x07] "upgrade" [0x09 0x00] "websocket"
+                       [0x00] [0x0a] "connection" [0x07 0x00] "upgrade"
+                       [0x00] [0x11] "sec-websocket-key" [0x18 0x00] /(?<key>[a-zA-Z0-9+\/=]{24})/
+                       [0x00] [0x15] "sec-websocket-version" [0x02 0x00] "13"
+                       [0x00] [0x16] "sec-websocket-protocol" [0x07 0x00] "primary"
 
-write nukleus:begin.ext ${http:header(":status", "101")}
-write nukleus:begin.ext ${http:header("upgrade", "websocket")}
-write nukleus:begin.ext ${http:header("connection", "upgrade")}
-write nukleus:begin.ext ${http:header("sec-websocket-accept", ws:handshakeHash(key))}
-write nukleus:begin.ext ${http:header("sec-websocket-protocol", "primary")}
+write nukleus:begin.ext ${http:headers()
+                              .item(":status", "101")
+                              .item("upgrade", "websocket")
+                              .item("connection", "upgrade")
+                              .item("sec-websocket-accept", ws:handshakeHash(key))
+                              .item("sec-websocket-protocol", "primary")
+                              .build()}
 
 connected
 
