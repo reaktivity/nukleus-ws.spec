@@ -56,11 +56,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.reaktivity</groupId>
-      <artifactId>nukleus.spec</artifactId>
-      <version>${nukleus.spec.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.kaazing</groupId>
       <artifactId>specification.ws</artifactId>
       <version>${k3po.version}</version>
