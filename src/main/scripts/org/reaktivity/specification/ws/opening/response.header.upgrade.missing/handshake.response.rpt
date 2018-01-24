@@ -31,4 +31,3 @@ write http:version "HTTP/1.1"
 write http:header "Connection" "Upgrade"
 write http:header "Sec-WebSocket-Accept" ${ws:handshakeHash(key)}
 write flush
-
