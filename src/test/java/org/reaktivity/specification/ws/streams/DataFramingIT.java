@@ -25,6 +25,7 @@ import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
+import org.reaktivity.specification.nukleus.NukleusRule;
 
 /**
  * RFC-6455, section 5.6 "Data Frames"
@@ -36,8 +37,10 @@ public class DataFramingIT
 
     private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
 
+    private final NukleusRule nukleus = new NukleusRule().directory("target/nukleus-itests");
+
     @Rule
-    public final TestRule chain = outerRule(k3po).around(timeout);
+    public final TestRule chain = outerRule(nukleus).around(k3po).around(timeout);
 
     // TODO: invalid UTF-8 in text frame (opcode 0x01) RFC-6455, section 8.1
 

@@ -32,7 +32,6 @@ property newServerAcceptRef  ${nuklei:newReferenceId()} # external
 connect await ROUTED_SERVER
         "nukleus://ws/streams/source"
   option nukleus:route ${newServerAcceptRef}
-  option nukleus:window 8192
   option nukleus:transmission "duplex"
 
 write nukleus:begin.ext ${http:headers()

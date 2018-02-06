@@ -24,7 +24,6 @@ property initialWindow 82000
 
 accept ${serverTransport}
   option nukleus:route  ${newServerAcceptRef}
-  option nukleus:window ${initialWindow}
   option nukleus:transmission "duplex"
 accepted
 

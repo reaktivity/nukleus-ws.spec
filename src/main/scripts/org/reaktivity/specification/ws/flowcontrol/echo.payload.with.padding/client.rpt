@@ -27,9 +27,7 @@ property initialWindow 8192
 connect await ROUTED_SERVER
         "nukleus://ws/streams/source"
   option nukleus:route ${newServerAcceptRef}
-  option nukleus:window ${initialWindow}
   option nukleus:transmission "duplex"
-  option nukleus:padding 1000
 
 write nukleus:begin.ext ${http:headers()
                               .item(":scheme", "http")
