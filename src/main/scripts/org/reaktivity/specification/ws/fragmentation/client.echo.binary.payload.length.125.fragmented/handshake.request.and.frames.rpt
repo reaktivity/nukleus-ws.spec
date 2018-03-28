@@ -57,22 +57,26 @@ connected
 
 write [0x02]
 write [0x99]
-write ${writeMaskA}
+write ${writeMaskA[0]}
+write ${writeMaskA[1]}
+write ${writeMaskA[2]}
+write ${writeMaskA[3]}
 write option mask ${writeMaskA}
 write ${client25a}
 write option mask [0x00 0x00 0x00 0x00]
 write flush
 
-write [0x00]
-write [0x99]
-write ${writeMaskB}
+write [0x00 0x99]
+write ${writeMaskB[0]} ${writeMaskB[1]}
+write ${writeMaskB[2]} ${writeMaskB[3]}
 write option mask ${writeMaskB}
 write ${client25b}
 write option mask [0x00 0x00 0x00 0x00]
 
 write [0x00]
 write [0x99]
-write ${writeMaskC}
+write ${writeMaskC[0]} ${writeMaskC[1]} ${writeMaskC[2]}
+write ${writeMaskC[3]}
 write option mask ${writeMaskC}
 write ${client25c}
 write option mask [0x00 0x00 0x00 0x00]
