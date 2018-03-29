@@ -14,23 +14,32 @@
 # under the License.
 #
 
-accept "http://localhost:8080/echo"
+property newServerAcceptRef  ${nuklei:newReferenceId()} # external
+property serverTransport "nukleus://target/streams/ws#source"
+
+accept ${serverTransport}
+  option nukleus:route  ${newServerAcceptRef}
+  option nukleus:window 8192
+  option nukleus:transmission "duplex"
 accepted
+
+read nukleus:begin.ext [0xbe 0x00 0x00 0x00]
+                       [0x00] [0x07] ":scheme" [0x04 0x00] "http"
+                       [0x00] [0x07] ":method" [0x03 0x00] "GET"
+                       [0x00] [0x05] ":path" [0x0b 0x00] "/path?query"
+                       [0x00] [0x0a] ":authority" [0x0e 0x00] "localhost:8080"
+                       [0x00] [0x07] "upgrade" [0x09 0x00] "websocket"
+                       [0x00] [0x0a] "connection" [0x07 0x00] "upgrade"
+                       [0x00] [0x11] "sec-websocket-key" [0x18 0x00] /(?<key>[a-zA-Z0-9+\/=]{24})/
+                       [0x00] [0x15] "sec-websocket-version" [0x02 0x00] "13"
+
+write nukleus:begin.ext ${http:headers()
+                              .item(":status", "101")
+                              .item("upgrade", "websocket")
+                              .item("connection", "upgrade")
+                              .item("sec-websocket-accept", ws:handshakeHash(key))
+                              .build()}
 connected
-
-read http:method "GET"
-read http:version "HTTP/1.1"
-read http:header "Host" "localhost:8080"
-read http:header "Upgrade" /(?i:websocket)/
-read http:header "Connection" /(?i:Upgrade)/
-read http:header "Sec-WebSocket-Key" /(?<key>[a-zA-Z0-9+\/=]{24})/
-read http:header "Sec-WebSocket-Version" "13"
-
-write http:status "101" "Switching Protocols"
-write http:version "HTTP/1.1"
-write http:header "Upgrade" "websocket"
-write http:header "Connection" "Upgrade"
-write http:header "Sec-WebSocket-Accept" ${ws:handshakeHash(key)}
 
 read [0x88 0x82] ([0..4] :readMask)
 read option mask ${readMask}
