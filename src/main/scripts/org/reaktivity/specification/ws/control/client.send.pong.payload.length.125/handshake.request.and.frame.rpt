@@ -18,11 +18,9 @@ property location 'http://localhost:8080/path?query'
 property newHandshakeKey ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
 property client125 ${ws:randomBytesUTF8(125)}
-property newServerAcceptRef  ${nuklei:newReferenceId()} # external
 
 connect await ROUTED_SERVER
-        "nukleus://ws/streams/source"
-  option nukleus:route ${newServerAcceptRef}
+        "nukleus://streams/ws#0"
   option nukleus:window 8192
   option nukleus:transmission "half-duplex"
 

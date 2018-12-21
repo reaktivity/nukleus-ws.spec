@@ -21,12 +21,10 @@ property location 'http://localhost:8080/echo'
 property key ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
 property client65535 ${ws:randomBytes(65535)}
-property newServerAcceptRef  ${nuklei:newReferenceId()} # external
 property initialWindow 82000
 
 connect await ROUTED_SERVER
-        "nukleus://ws/streams/source"
-  option nukleus:route ${newServerAcceptRef}
+        "nukleus://streams/ws#0"
   option nukleus:window ${initialWindow}
   option nukleus:transmission "duplex"
 

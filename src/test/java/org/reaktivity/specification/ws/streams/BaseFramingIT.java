@@ -44,7 +44,7 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.0/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.0/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldEchoBinaryFrameWithPayloadLength0() throws Exception
     {
         k3po.start();
@@ -56,7 +56,7 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.125/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.125/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldEchoBinaryFrameWithPayloadLength125() throws Exception
     {
         k3po.start();
@@ -70,7 +70,7 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.126/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.126/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldEchoBinaryFrameWithPayloadLength126() throws Exception
     {
         k3po.start();
@@ -100,7 +100,7 @@ public class BaseFramingIT
     @Specification({
         "${streams}/echo.binary.payload.length.65535/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.65535/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldEchoBinaryFrameWithPayloadLength65535() throws Exception
     {
         k3po.start();

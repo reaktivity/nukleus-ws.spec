@@ -30,19 +30,17 @@ connected
 
 write 0x00000001
 write ${controlRG010001C.nextCorrelationId()}
+write ${core:string("ws")}
 write [0x00]
-write [0x06] "source"
-write 0L
-write [0x06] "target"
-write ${newServerConnectRef}
 write ${routeAuthorization}
-write [0x07] "primary"
+write ${core:string("ws#0")}
+write ${core:string("target#0")}
+write ${core:string("primary")}
 write flush
 
 read 0x40000001
 read ${controlRG010001C.correlationId()}
-read (long:newServerAcceptRef)
-read ${newServerConnectRef}
+read (long:newServerRouteId)
 
 read notify ROUTED_SERVER
 

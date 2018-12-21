@@ -50,7 +50,7 @@ public class ControlIT
     @Specification({
         "${streams}/client.send.pong.payload.length.0/handshake.request",
         "${streams}/client.send.pong.payload.length.0/handshake.response" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldReceiveClientPongFrameWithEmptyPayload() throws Exception
     {
         k3po.start();
@@ -62,7 +62,7 @@ public class ControlIT
     @Specification({
         "${streams}/client.send.pong.payload.length.125/handshake.request",
         "${streams}/client.send.pong.payload.length.125/handshake.response" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldReceiveClientPongFrameWithPayload() throws Exception
     {
         k3po.start();
@@ -74,7 +74,7 @@ public class ControlIT
     @Specification({
         "${streams}/client.send.pong.payload.length.126/handshake.request",
         "${streams}/client.send.pong.payload.length.126/handshake.response" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldRejectClientPongFrameWithPayloadTooLong() throws Exception
     {
         k3po.start();

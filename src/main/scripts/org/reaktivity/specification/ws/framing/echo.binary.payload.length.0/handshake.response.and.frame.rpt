@@ -18,11 +18,9 @@
 #       is enhanced to support manifesting this as high-level http
 
 property location 'http://localhost:8080/echo'
-property newServerAcceptRef  ${nuklei:newReferenceId()} # external
-property serverTransport "nukleus://target/streams/ws#source"
+property serverTransport "nukleus://streams/target#0"
 
 accept ${serverTransport}
-  option nukleus:route  ${newServerAcceptRef}
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 accepted

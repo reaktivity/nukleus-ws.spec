@@ -14,14 +14,11 @@
 # under the License.
 #
 
-property newServerAcceptRef ${nuklei:newReferenceId()} # external
-property newServerConnectRef ${newServerAcceptRef} # external
 property initialWindow 8192
 
-property serverConnect "nukleus://target/streams/ws#source"
+property serverConnect "nukleus://streams/target#0"
 
 accept ${serverConnect}
-  option nukleus:route  ${newServerConnectRef}
   option nukleus:window ${initialWindow}
   option nukleus:transmission "duplex"
   option nukleus:padding 1000

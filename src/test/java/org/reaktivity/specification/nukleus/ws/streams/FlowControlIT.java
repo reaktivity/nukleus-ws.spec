@@ -45,7 +45,7 @@ public class FlowControlIT
     @Specification({
         "${streams}/echo.payload.with.padding/client",
         "${streams}/echo.payload.with.padding/server" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldEchoPayloadWithPadding() throws Exception
     {
         k3po.start();

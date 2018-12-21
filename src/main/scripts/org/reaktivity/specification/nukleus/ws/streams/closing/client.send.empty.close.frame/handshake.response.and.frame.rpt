@@ -14,14 +14,10 @@
 # under the License.
 #
 
-property newServerAcceptRef ${nuklei:newReferenceId()} # external
-property newServerConnectRef ${newServerAcceptRef} # external
-
 property location 'http://localhost:8080/path?query'
-property serverConnect "nukleus://target/streams/ws#source"
+property serverConnect "nukleus://streams/target#0"
 
 accept ${serverConnect}
-       option nukleus:route  ${newServerConnectRef}
        option nukleus:window 8192
        option nukleus:transmission "duplex"
 accepted
