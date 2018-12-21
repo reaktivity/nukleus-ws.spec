@@ -48,7 +48,7 @@ public class FragmentationIT
     @Specification({
         "${streams}/echo.binary.payload.length.125.fragmented/handshake.request.and.frame",
         "${streams}/echo.binary.payload.length.125.fragmented/handshake.response.and.frame" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldEchoBinaryFrameWithPayloadLength125() throws Exception
     {
         k3po.start();

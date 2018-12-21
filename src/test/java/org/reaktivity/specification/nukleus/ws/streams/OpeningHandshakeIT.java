@@ -50,7 +50,7 @@ public class OpeningHandshakeIT
     @Specification({
         "${streams}/connection.established/handshake.request",
         "${streams}/connection.established/handshake.response" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldEstablishConnection() throws Exception
     {
         k3po.start();
@@ -105,7 +105,7 @@ public class OpeningHandshakeIT
     @Specification({
         "${streams}/connection.established/handshake.request",
         "${streams}/connection.established/handshake.response" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldEstablishConnectionWithRequestHeaderSecWebSocketProtocol()
             throws Exception
     {

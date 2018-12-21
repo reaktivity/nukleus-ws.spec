@@ -46,7 +46,7 @@ public class ClosingHandshakeIT
     @Specification({
             "${streams}/client.send.empty.close.frame/handshake.request.and.frame",
             "${streams}/client.send.empty.close.frame/handshake.response.and.frame" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldCompleteCloseHandshakeWhenClientSendEmptyCloseFrame() throws Exception
     {
         k3po.start();
@@ -58,7 +58,7 @@ public class ClosingHandshakeIT
     @Specification({
         "${streams}/client.send.close.frame.with.code.1005/handshake.request.and.frame",
         "${streams}/client.send.close.frame.with.code.1005/handshake.response.and.frame" })
-    @ScriptProperty("serverConnect \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverConnect \"nukleus://streams/ws#0\"")
     public void shouldCompleteCloseHandshakeWhenClientSendCloseFrameWithCode1005() throws Exception
     {
         k3po.start();

@@ -26,18 +26,16 @@ connected
 
 read 0x00000001
 read (long:correlationIdRG010001N)
+read ${core:string("ws")}
 read [0x00]
-read [0x06] "source"
-read 0L
-read [0x06] "target"
-read (long:serveConnectRefRG010001N)
 read [0..8] # authorization
-read [0x07] "primary"
+read ${core:string("ws#0")}
+read ${core:string("target#0")}
+read ${core:string("primary")}
 
 write 0x40000001
 write ${correlationIdRG010001N}
-write ${nuklei:newReferenceId()}
-write ${serveConnectRefRG010001N}
+write ${nukleus:newServerRouteId("ws#0", "target#0")}
 write flush
 
 close

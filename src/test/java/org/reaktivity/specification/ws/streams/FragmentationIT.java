@@ -174,7 +174,7 @@ public class FragmentationIT
     @Specification({
         "client.echo.binary.payload.length.125.fragmented/handshake.request.and.frames",
         "client.echo.binary.payload.length.125.fragmented/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://ws/streams/source\"")
+    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldEchoClientSendBinaryFrameWithPayloadFragmented()
             throws Exception
     {
