@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.reaktivity</groupId>
   <artifactId>nukleus-ws.spec</artifactId>
-  <version>0.37</version>
+  <version>0.38</version>
   <name>WebSocket Nukleus Specification</name>
   <description>WebSocket Nukleus Specification</description>
   <url>https://github.com/reaktivity/nukleus-ws.spec</url>
@@ -42,7 +42,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <checkstyle.config.location>src/conf/checkstyle/configuration.xml</checkstyle.config.location>
     <checkstyle.suppressions.location>src/conf/checkstyle/suppressions.xml</checkstyle.suppressions.location>
-    <jacoco.coverage.ratio>1.00</jacoco.coverage.ratio>
+    <jacoco.coverage.ratio>0.16</jacoco.coverage.ratio>
     <jacoco.missed.count>0</jacoco.missed.count>
 
     <junit.version>4.12</junit.version>
@@ -55,11 +55,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.kaazing</groupId>
-      <artifactId>specification.ws</artifactId>
-      <version>${k3po.version}</version>
-    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -97,11 +92,13 @@
         <artifactId>nukleus-maven-plugin</artifactId>
         <version>${nukleus.plugin.version}</version>
         <configuration>
-          <scopeNames>ws</scopeNames>
+          <scopeNames>core ws</scopeNames>
+          <packageName>org.reaktivity.nukleus.specification.ws.internal.types</packageName>
         </configuration>
         <executions>
           <execution>
             <goals>
+              <goal>generate</goal>
               <goal>validate</goal>
             </goals>
           </execution>
@@ -169,6 +166,9 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.7.9</version>
         <configuration>
+          <excludes>
+            <exclude>org/reaktivity/nukleus/specification/ws/internal/types/**/*.class</exclude>
+          </excludes>
           <rules>
             <rule>
               <element>BUNDLE</element>

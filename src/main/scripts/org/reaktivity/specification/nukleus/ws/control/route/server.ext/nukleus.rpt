@@ -31,6 +31,11 @@ read [0x00]
 read [0..8] # authorization
 read ${core:string("ws#0")}
 read ${core:string("target#0")}
+read ${ws:routeEx().protocol("primary")
+                   .scheme("http")
+                   .authority("localhost:8080")
+                   .path("/path?query")
+                   .build()}
 
 write 0x40000001
 write ${correlationIdRG010001N}

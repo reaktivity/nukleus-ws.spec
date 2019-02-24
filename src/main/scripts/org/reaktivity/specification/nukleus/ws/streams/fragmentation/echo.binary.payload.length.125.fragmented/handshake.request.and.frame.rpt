@@ -26,7 +26,7 @@ property client25c ${ws:randomBytes(25)}
 property client25d ${ws:randomBytes(25)}
 property client25e ${ws:randomBytes(25)}
 
-connect await ROUTED_SERVER
+connect await ROUTED_CLIENT
         "nukleus://streams/ws#0"
         option nukleus:window 8192
         option nukleus:transmission "duplex"

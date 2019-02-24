@@ -20,6 +20,9 @@ scope ws
         struct WsRouteEx
         {
             string protocol;
+            string scheme;
+            string authority;
+            string path;
         }
     }
 
@@ -28,6 +31,9 @@ scope ws
         struct WsBeginEx
         {
             string protocol;
+            string scheme;
+            string authority;
+            string path;
         }
 
         struct WsDataEx

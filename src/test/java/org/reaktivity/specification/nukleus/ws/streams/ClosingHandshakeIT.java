@@ -50,7 +50,7 @@ public class ClosingHandshakeIT
     public void shouldCompleteCloseHandshakeWhenClientSendEmptyCloseFrame() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 
@@ -62,7 +62,7 @@ public class ClosingHandshakeIT
     public void shouldCompleteCloseHandshakeWhenClientSendCloseFrameWithCode1005() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 
