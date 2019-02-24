@@ -28,8 +28,8 @@ import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
 /**
- * RFC-6455, section 4.1 "Client-Side Requirements" RFC-6455, section 4.2
- * "Server-Side Requirements"
+ * RFC-6455, section 4.1 "Client-Side Requirements"
+ * RFC-6455, section 4.2 "Server-Side Requirements"
  */
 public class OpeningHandshakeIT
 {

@@ -54,7 +54,7 @@ public class ControlIT
     public void shouldReceiveClientPongFrameWithEmptyPayload() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 
@@ -66,7 +66,7 @@ public class ControlIT
     public void shouldReceiveClientPongFrameWithPayload() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 
@@ -78,7 +78,7 @@ public class ControlIT
     public void shouldRejectClientPongFrameWithPayloadTooLong() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 }

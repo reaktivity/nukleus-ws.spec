@@ -53,7 +53,7 @@ public class BaseFramingIT
     public void shouldEchoBinaryFrameWithPayloadLength0() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 
@@ -65,7 +65,7 @@ public class BaseFramingIT
     public void shouldEchoBinaryFrameWithPayloadLength125() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 
@@ -80,7 +80,7 @@ public class BaseFramingIT
     public void shouldEchoBinaryFrameWithPayloadLength126() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 
@@ -112,7 +112,7 @@ public class BaseFramingIT
     public void shouldEchoBinaryFrameWithPayloadLength65535() throws Exception
     {
         k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
+        k3po.notifyBarrier("ROUTED_CLIENT");
         k3po.finish();
     }
 

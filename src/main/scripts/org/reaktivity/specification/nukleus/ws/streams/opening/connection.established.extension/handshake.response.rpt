@@ -14,17 +14,20 @@
 # under the License.
 #
 
-property key ${ws:handshakeKey()}
-property writeMask ${ws:randomBytes(4)}
-property client126 ${ws:randomBytes(126)}
+property location 'http://localhost:8080/path?query'
+property serverConnect "nukleus://streams/target#0"
 
-connect await ROUTED_CLIENT
-        "nukleus://streams/ws#0"
-        option nukleus:window 8192
-        option nukleus:transmission "duplex"
+accept ${serverConnect}
+       option nukleus:window 8192
+       option nukleus:transmission "duplex"
+accepted
 
+read nukleus:begin.ext ${ws:beginEx()
+                              .protocol("primary")
+                              .scheme("http")
+                              .authority("localhost:8080")
+                              .path("/path?query")
+                              .build()}
 connected
 
-write ${client126}
-
-read ${client126}
+# connection established

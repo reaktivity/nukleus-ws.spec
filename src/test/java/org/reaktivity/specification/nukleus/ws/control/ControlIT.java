@@ -47,10 +47,30 @@ public class ControlIT
 
     @Test
     @Specification({
+        "route/server.ext/nukleus",
+        "route/server.ext/controller"
+    })
+    public void shouldRouteServerExt() throws Exception
+    {
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
         "route/client/nukleus",
         "route/client/controller"
     })
     public void shouldRouteClient() throws Exception
+    {
+        k3po.finish();
+    }
+
+    @Test
+    @Specification({
+        "route/client.ext/nukleus",
+        "route/client.ext/controller"
+    })
+    public void shouldRouteClientExt() throws Exception
     {
         k3po.finish();
     }

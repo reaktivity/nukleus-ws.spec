@@ -18,7 +18,7 @@ property location 'http://localhost:8080/echo'
 property key ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
 
-connect await ROUTED_SERVER
+connect await ROUTED_CLIENT
         "nukleus://streams/ws#0"
         option nukleus:window 8192
         option nukleus:transmission "duplex"
