@@ -17,7 +17,6 @@
 # TODO: revert this script to use k3po http transport as in k3po http specification once k3po
 #       is enhanced to support manifesting this as high-level http
 
-property location 'http://localhost:8080/echo'
 property newHandshakeKey ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
 
@@ -30,8 +29,8 @@ write nukleus:begin.ext ${http:headers()
                               .item(":method", "GET")
                               .item("upgrade", "websocket")
                               .item("connection", "upgrade")
-                              .item("sec-websocket-version", "13")
                               .item("sec-websocket-key", newHandshakeKey)
+                              .item("sec-websocket-version", "13")
                               .build()}
 
 read nukleus:begin.ext ${http:headers()

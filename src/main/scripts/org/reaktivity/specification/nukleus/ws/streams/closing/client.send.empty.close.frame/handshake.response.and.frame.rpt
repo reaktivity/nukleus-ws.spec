@@ -14,7 +14,6 @@
 # under the License.
 #
 
-property location 'http://localhost:8080/path?query'
 property serverConnect "nukleus://streams/target#0"
 
 accept ${serverConnect}

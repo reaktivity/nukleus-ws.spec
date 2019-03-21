@@ -17,7 +17,6 @@
 # TODO: revert this script to use k3po http transport as in k3po http specification once k3po
 #       is enhanced to support manifesting this as high-level http
 
-property location 'http://localhost:8080/path?query'
 property newHandshakeKey ${ws:handshakeKey()}
 property writeMask ${ws:randomBytes(4)}
 property client124 ${ws:randomBytesUTF8(124)}
@@ -28,10 +27,10 @@ connect await ROUTED_SERVER
   option nukleus:transmission "half-duplex"
 
 write nukleus:begin.ext ${http:headers()
-                              .item(":scheme", "http")
                               .item(":method", "GET")
-                              .item(":path", "/path?query")
+                              .item(":scheme", "http")
                               .item(":authority", "localhost:8080")
+                              .item(":path", "/echo")
                               .item("upgrade", "websocket")
                               .item("connection", "upgrade")
                               .item("sec-websocket-key", newHandshakeKey)

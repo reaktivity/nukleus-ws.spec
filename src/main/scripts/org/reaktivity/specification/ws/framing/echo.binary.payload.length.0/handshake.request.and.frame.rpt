@@ -27,10 +27,10 @@ connect await ROUTED_SERVER
   option nukleus:transmission "duplex"
 
 write nukleus:begin.ext ${http:headers()
-                              .item(":scheme", "http")
                               .item(":method", "GET")
-                              .item(":path", "/echo")
+                              .item(":scheme", "http")
                               .item(":authority", "localhost:8080")
+                              .item(":path", "/echo")
                               .item("upgrade", "websocket")
                               .item("connection", "upgrade")
                               .item("sec-websocket-key", key)

@@ -30,11 +30,11 @@ write nukleus:begin.ext ${http:headers()
                               .item(":method", "GET")
                               .item(":scheme", "http")
                               .item(":authority", "localhost:8080")
-                              .item(":path", "/path?query")
+                              .item(":path", "/echo")
                               .item("upgrade", "websocket")
                               .item("connection", "upgrade")
-                              .item("sec-websocket-version", "13")
                               .item("sec-websocket-key", newHandshakeKey)
+                              .item("sec-websocket-version", "13")
                               .item("sec-websocket-protocol", "primary")
                               .build()}
 

@@ -34,7 +34,7 @@ read ${core:string("target#0")}
 read ${ws:routeEx().protocol("primary")
                    .scheme("http")
                    .authority("localhost:8080")
-                   .path("/path?query")
+                   .path("/echo")
                    .build()}
 
 write 0x40000001
