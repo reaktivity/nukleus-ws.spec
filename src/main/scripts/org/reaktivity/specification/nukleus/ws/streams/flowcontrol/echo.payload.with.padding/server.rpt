@@ -24,6 +24,13 @@ accept ${serverConnect}
   option nukleus:padding 1000
 accepted
 
+read nukleus:begin.ext ${ws:beginEx()
+                              .protocol(null)
+                              .scheme("http")
+                              .authority("localhost:8080")
+                              .path("/echo")
+                              .build()}
+
 connected
 
 read ([0..65535] :server65535)

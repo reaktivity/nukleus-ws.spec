@@ -25,15 +25,15 @@ accept ${serverTransport}
   option nukleus:transmission "duplex"
 accepted
 
-read nukleus:begin.ext [0xdf 0x00 0x00 0x00]
+read nukleus:begin.ext [0xd9 0x00 0x00 0x00]
                        [0x00] [0x07] ":method" [0x03 0x00] "GET"
                        [0x00] [0x07] ":scheme" [0x04 0x00] "http"
                        [0x00] [0x0a] ":authority" [0x0e 0x00] "localhost:8080"
-                       [0x00] [0x05] ":path" [0x0b 0x00] "/path?query"
+                       [0x00] [0x05] ":path" [0x05 0x00] "/echo"
                        [0x00] [0x07] "upgrade" [0x09 0x00] "websocket"
                        [0x00] [0x0a] "connection" [0x07 0x00] "upgrade"
-                       [0x00] [0x15] "sec-websocket-version" [0x02 0x00] "13"
                        [0x00] [0x11] "sec-websocket-key" [0x18 0x00] /(?<key>[a-zA-Z0-9+\/=]{24})/
+                       [0x00] [0x15] "sec-websocket-version" [0x02 0x00] "13"
                        [0x00] [0x16] "sec-websocket-protocol" [0x07 0x00] "primary"
 
 write nukleus:begin.ext ${http:headers()

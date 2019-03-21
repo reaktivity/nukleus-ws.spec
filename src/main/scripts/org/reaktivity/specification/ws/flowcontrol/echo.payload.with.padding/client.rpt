@@ -30,10 +30,10 @@ connect await ROUTED_SERVER
   option nukleus:padding 1000
 
 write nukleus:begin.ext ${http:headers()
-                              .item(":scheme", "http")
                               .item(":method", "GET")
-                              .item(":path", "/path?query")
+                              .item(":scheme", "http")
                               .item(":authority", "localhost:8080")
+                              .item(":path", "/echo")
                               .item("upgrade", "websocket")
                               .item("connection", "upgrade")
                               .item("sec-websocket-key", key)

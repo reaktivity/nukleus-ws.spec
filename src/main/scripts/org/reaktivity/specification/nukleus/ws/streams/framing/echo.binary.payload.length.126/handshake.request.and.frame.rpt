@@ -23,6 +23,13 @@ connect await ROUTED_CLIENT
         option nukleus:window 8192
         option nukleus:transmission "duplex"
 
+write nukleus:begin.ext ${ws:beginEx()
+                              .protocol(null)
+                              .scheme("http")
+                              .authority("localhost:8080")
+                              .path("/echo")
+                              .build()}
+
 connected
 
 write ${client126}

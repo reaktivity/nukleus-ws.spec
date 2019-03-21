@@ -21,6 +21,13 @@ accept ${serverConnect}
   option nukleus:transmission "duplex"
 accepted
 
+read nukleus:begin.ext ${ws:beginEx()
+                              .protocol(null)
+                              .scheme("http")
+                              .authority("localhost:8080")
+                              .path("/echo")
+                              .build()}
+
 connected
 
 read ([0..126] :server126)

@@ -34,7 +34,7 @@ write ${core:string("target#0")}
 write ${ws:routeEx().protocol("primary")
                     .scheme("http")
                     .authority("localhost:8080")
-                    .path("/path?query")
+                    .path("/echo")
                     .build()}
 write flush
 
