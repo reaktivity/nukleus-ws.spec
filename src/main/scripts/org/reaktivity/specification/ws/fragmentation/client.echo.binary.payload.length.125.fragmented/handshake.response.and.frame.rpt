@@ -25,7 +25,8 @@ accept ${serverTransport}
   option nukleus:transmission "duplex"
 accepted
 
-read nukleus:begin.ext [0xb8 0x00 0x00 0x00]
+read nukleus:begin.ext ${nukleus:id("http")}
+                       [0xb8 0x00 0x00 0x00]
                        [0x00] [0x07] ":scheme" [0x04 0x00] "http"
                        [0x00] [0x07] ":method" [0x03 0x00] "GET"
                        [0x00] [0x05] ":path" [0x05 0x00] "/echo"
@@ -35,11 +36,12 @@ read nukleus:begin.ext [0xb8 0x00 0x00 0x00]
                        [0x00] [0x11] "sec-websocket-key" [0x18 0x00] /(?<key>[a-zA-Z0-9+\/=]{24})/
                        [0x00] [0x15] "sec-websocket-version" [0x02 0x00] "13"
 
-write nukleus:begin.ext ${http:headers()
-                              .item(":status", "101")
-                              .item("upgrade", "websocket")
-                              .item("connection", "upgrade")
-                              .item("sec-websocket-accept", ws:handshakeHash(key))
+write nukleus:begin.ext ${http:beginEx()
+                              .typeId(nukleus:id("http"))
+                              .header(":status", "101")
+                              .header("upgrade", "websocket")
+                              .header("connection", "upgrade")
+                              .header("sec-websocket-accept", ws:handshakeHash(key))
                               .build()}
 
 connected

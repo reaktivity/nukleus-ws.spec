@@ -28,7 +28,7 @@ scope ws
 
     scope stream
     {
-        struct WsBeginEx
+        struct WsBeginEx extends core::stream::Extension
         {
             string protocol;
             string scheme;
@@ -36,13 +36,13 @@ scope ws
             string path;
         }
 
-        struct WsDataEx
+        struct WsDataEx extends core::stream::Extension
         {
             uint8 flags;
             octets info;
         }
 
-        struct WsEndEx
+        struct WsEndEx extends core::stream::Extension
         {
             int16 code;
             string reason;

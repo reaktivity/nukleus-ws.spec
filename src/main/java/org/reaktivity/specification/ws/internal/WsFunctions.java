@@ -38,59 +38,23 @@ public final class WsFunctions
     private static final Encoder BASE64_ENCODER = java.util.Base64.getEncoder();
     private static final int MAX_BUFFER_SIZE = 1024 * 8;
 
-    public static class WsBeginExHelper
+    @Function
+    public static WsRouteExHelper routeEx()
     {
-        private final WsBeginExFW.Builder wsBeginExRW;
-
-        public WsBeginExHelper()
-        {
-            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[MAX_BUFFER_SIZE]);
-            this.wsBeginExRW = new WsBeginExFW.Builder()
-                                    .wrap(writeBuffer, 0, writeBuffer.capacity());
-        }
-
-        public WsBeginExHelper protocol(
-            String protocol)
-        {
-            wsBeginExRW.protocol(protocol);
-            return this;
-        }
-
-        public WsBeginExHelper scheme(
-            String scheme)
-        {
-            wsBeginExRW.scheme(scheme);
-            return this;
-        }
-
-        public WsBeginExHelper authority(
-            String authority)
-        {
-            wsBeginExRW.authority(authority);
-            return this;
-        }
-
-        public WsBeginExHelper path(
-            String path)
-        {
-            wsBeginExRW.path(path);
-            return this;
-        }
-
-        public byte[] build()
-        {
-            final WsBeginExFW wsBeginEx = wsBeginExRW.build();
-            final byte[] result = new byte[wsBeginEx.sizeof()];
-            wsBeginEx.buffer().getBytes(0, result);
-            return result;
-        }
+        return new WsRouteExHelper();
     }
 
-    public static class WsRouteExHelper
+    @Function
+    public static WsBeginExHelper beginEx()
+    {
+        return new WsBeginExHelper();
+    }
+
+    public static final class WsRouteExHelper
     {
         private final WsRouteExFW.Builder wsRouteExRW;
 
-        public WsRouteExHelper()
+        private WsRouteExHelper()
         {
             MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[MAX_BUFFER_SIZE]);
             this.wsRouteExRW = new WsRouteExFW.Builder()
@@ -134,16 +98,59 @@ public final class WsFunctions
         }
     }
 
-    @Function
-    public static WsBeginExHelper beginEx()
+    public static final class WsBeginExHelper
     {
-        return new WsBeginExHelper();
-    }
+        private final WsBeginExFW.Builder wsBeginExRW;
 
-    @Function
-    public static WsRouteExHelper routeEx()
-    {
-        return new WsRouteExHelper();
+        private WsBeginExHelper()
+        {
+            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[MAX_BUFFER_SIZE]);
+            this.wsBeginExRW = new WsBeginExFW.Builder()
+                                    .wrap(writeBuffer, 0, writeBuffer.capacity());
+        }
+
+        public WsBeginExHelper typeId(
+            int typeId)
+        {
+            wsBeginExRW.typeId(typeId);
+            return this;
+        }
+
+        public WsBeginExHelper protocol(
+            String protocol)
+        {
+            wsBeginExRW.protocol(protocol);
+            return this;
+        }
+
+        public WsBeginExHelper scheme(
+            String scheme)
+        {
+            wsBeginExRW.scheme(scheme);
+            return this;
+        }
+
+        public WsBeginExHelper authority(
+            String authority)
+        {
+            wsBeginExRW.authority(authority);
+            return this;
+        }
+
+        public WsBeginExHelper path(
+            String path)
+        {
+            wsBeginExRW.path(path);
+            return this;
+        }
+
+        public byte[] build()
+        {
+            final WsBeginExFW wsBeginEx = wsBeginExRW.build();
+            final byte[] result = new byte[wsBeginEx.sizeof()];
+            wsBeginEx.buffer().getBytes(0, result);
+            return result;
+        }
     }
 
     private static final byte[] WEBSOCKET_GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11".getBytes(US_ASCII);
