@@ -29,22 +29,24 @@ connect await ROUTED_SERVER
   option nukleus:transmission "duplex"
   option nukleus:padding 1000
 
-write nukleus:begin.ext ${http:headers()
-                              .item(":method", "GET")
-                              .item(":scheme", "http")
-                              .item(":authority", "localhost:8080")
-                              .item(":path", "/echo")
-                              .item("upgrade", "websocket")
-                              .item("connection", "upgrade")
-                              .item("sec-websocket-key", key)
-                              .item("sec-websocket-version", "13")
+write nukleus:begin.ext ${http:beginEx()
+                              .typeId(nukleus:id("http"))
+                              .header(":method", "GET")
+                              .header(":scheme", "http")
+                              .header(":authority", "localhost:8080")
+                              .header(":path", "/echo")
+                              .header("upgrade", "websocket")
+                              .header("connection", "upgrade")
+                              .header("sec-websocket-key", key)
+                              .header("sec-websocket-version", "13")
                               .build()}
 
-read nukleus:begin.ext ${http:headers()
-                             .item(":status", "101")
-                             .item("upgrade", "websocket")
-                             .item("connection", "upgrade")
-                             .item("sec-websocket-accept", ws:handshakeHash(key))
+read nukleus:begin.ext ${http:beginEx()
+                             .typeId(nukleus:id("http"))
+                             .header(":status", "101")
+                             .header("upgrade", "websocket")
+                             .header("connection", "upgrade")
+                             .header("sec-websocket-accept", ws:handshakeHash(key))
                              .build()}
 
 connected

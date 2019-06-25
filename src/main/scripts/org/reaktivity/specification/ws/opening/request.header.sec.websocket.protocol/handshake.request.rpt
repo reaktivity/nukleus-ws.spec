@@ -26,24 +26,26 @@ connect await ROUTED_SERVER
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
-write nukleus:begin.ext ${http:headers()
-                              .item(":method", "GET")
-                              .item(":scheme", "http")
-                              .item(":authority", "localhost:8080")
-                              .item(":path", "/echo")
-                              .item("upgrade", "websocket")
-                              .item("connection", "upgrade")
-                              .item("sec-websocket-key", newHandshakeKey)
-                              .item("sec-websocket-version", "13")
-                              .item("sec-websocket-protocol", "primary")
+write nukleus:begin.ext ${http:beginEx()
+                              .typeId(nukleus:id("http"))
+                              .header(":method", "GET")
+                              .header(":scheme", "http")
+                              .header(":authority", "localhost:8080")
+                              .header(":path", "/echo")
+                              .header("upgrade", "websocket")
+                              .header("connection", "upgrade")
+                              .header("sec-websocket-key", newHandshakeKey)
+                              .header("sec-websocket-version", "13")
+                              .header("sec-websocket-protocol", "primary")
                               .build()}
 
-read nukleus:begin.ext ${http:headers()
-                             .item(":status", "101")
-                             .item("upgrade", "websocket")
-                             .item("connection", "upgrade")
-                             .item("sec-websocket-accept", ws:handshakeHash(newHandshakeKey))
-                             .item("sec-websocket-protocol", "primary")
+read nukleus:begin.ext ${http:beginEx()
+                             .typeId(nukleus:id("http"))
+                             .header(":status", "101")
+                             .header("upgrade", "websocket")
+                             .header("connection", "upgrade")
+                             .header("sec-websocket-accept", ws:handshakeHash(newHandshakeKey))
+                             .header("sec-websocket-protocol", "primary")
                              .build()}
 
 connected

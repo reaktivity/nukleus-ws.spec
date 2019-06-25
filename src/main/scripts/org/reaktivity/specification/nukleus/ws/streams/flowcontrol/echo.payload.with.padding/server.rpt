@@ -25,11 +25,12 @@ accept ${serverConnect}
 accepted
 
 read nukleus:begin.ext ${ws:beginEx()
-                              .protocol(null)
-                              .scheme("http")
-                              .authority("localhost:8080")
-                              .path("/echo")
-                              .build()}
+                           .typeId(nukleus:id("ws"))
+                           .protocol(null)
+                           .scheme("http")
+                           .authority("localhost:8080")
+                           .path("/echo")
+                           .build()}
 
 connected
 

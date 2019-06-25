@@ -76,7 +76,8 @@ public class WsFunctionsTest
     @Test
     public void shouldEncodeWsBeginExt()
     {
-        final byte[] array = beginEx().protocol("primary")
+        final byte[] array = beginEx().typeId(0x01)
+                                      .protocol("primary")
                                       .scheme("http")
                                       .authority("localhost:8080")
                                       .path("/path?query")
@@ -85,6 +86,7 @@ public class WsFunctionsTest
         DirectBuffer buffer = new UnsafeBuffer(array);
         WsBeginExFW wsBeginEx = new WsBeginExFW().wrap(buffer, 0, buffer.capacity());
 
+        assertEquals(wsBeginEx.typeId(), 0x01);
         assertEquals(wsBeginEx.protocol().asString(), "primary");
         assertEquals(wsBeginEx.scheme().asString(), "http");
         assertEquals(wsBeginEx.authority().asString(), "localhost:8080");

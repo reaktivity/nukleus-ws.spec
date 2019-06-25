@@ -25,19 +25,21 @@ connect await ROUTED_SERVER
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 
-write nukleus:begin.ext ${http:headers()
-                              .item(":method", "GET")
-                              .item("upgrade", "websocket")
-                              .item("connection", "upgrade")
-                              .item("sec-websocket-key", newHandshakeKey)
-                              .item("sec-websocket-version", "13")
+write nukleus:begin.ext ${http:beginEx()
+                              .typeId(nukleus:id("http"))
+                              .header(":method", "GET")
+                              .header("upgrade", "websocket")
+                              .header("connection", "upgrade")
+                              .header("sec-websocket-key", newHandshakeKey)
+                              .header("sec-websocket-version", "13")
                               .build()}
 
-read nukleus:begin.ext ${http:headers()
-                             .item(":status", "101")
-                             .item("upgrade", "websocket")
-                             .item("connection", "upgrade")
-                             .item("sec-websocket-accept", ws:handshakeHash(newHandshakeKey))
+read nukleus:begin.ext ${http:beginEx()
+                             .typeId(nukleus:id("http"))
+                             .header(":status", "101")
+                             .header("upgrade", "websocket")
+                             .header("connection", "upgrade")
+                             .header("sec-websocket-accept", ws:handshakeHash(newHandshakeKey))
                              .build()}
 
 connected
