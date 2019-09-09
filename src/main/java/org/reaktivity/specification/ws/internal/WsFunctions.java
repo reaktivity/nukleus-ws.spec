@@ -328,8 +328,9 @@ public final class WsFunctions
         }
     }
 
-    private static int randomCharBytesUTF8(byte[] bytes, int offset, int width)
+    private static int randomCharBytesUTF8(byte[] bytes, int index, int width)
     {
+        int offset = index;
         switch (width)
         {
         case 1:
