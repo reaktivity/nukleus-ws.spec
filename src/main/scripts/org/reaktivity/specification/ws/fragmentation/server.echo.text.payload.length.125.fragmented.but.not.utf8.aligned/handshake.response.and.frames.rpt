@@ -14,9 +14,9 @@
 # under the License.
 #
 
-property server125 ${ws:randomBytesUnalignedUTF8(125, 25)}
-property server25 ${ws:copyOfRange(server125, 0, 25)}
-property server100 ${ws:copyOfRange(server125, 25, 125)}
+property server125 ${http:randomBytesUnalignedUTF8(125, 25)}
+property server25 ${http:copyOfRange(server125, 0, 25)}
+property server100 ${http:copyOfRange(server125, 25, 125)}
 
 accept "http://localhost:8080/echo"
 accepted

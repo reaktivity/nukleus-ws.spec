@@ -19,6 +19,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.kaazing.k3po.lang.internal.el.ExpressionFactoryUtils.newExpressionFactory;
 import static org.reaktivity.specification.ws.internal.WsFunctions.beginEx;
+import static org.reaktivity.specification.ws.internal.WsFunctions.handshakeHash;
+import static org.reaktivity.specification.ws.internal.WsFunctions.handshakeKey;
 import static org.reaktivity.specification.ws.internal.WsFunctions.routeEx;
 
 import javax.el.ELContext;
@@ -53,6 +55,21 @@ public class WsFunctionsTest
         ValueExpression expression = factory.createValueExpression(ctx, expressionText, WsBeginExHelper.class);
         WsBeginExHelper builder = (WsBeginExHelper) expression.getValue(ctx);
         assertNotNull(builder);
+    }
+
+    @Test
+    public void shouldGenerateHandshakeKey() throws Exception
+    {
+        String handshakeKey = handshakeKey();
+        assertNotNull(handshakeKey);
+        assertEquals(24, handshakeKey.length());
+    }
+
+    @Test
+    public void shouldComputeHandshakeHash() throws Exception
+    {
+        String handshakeHash = handshakeHash("dGhlIHNhbXBsZSBub25jZQ==");
+        assertEquals("s3pPLMBiTxaQ9kYGzzhZRbK+xOo=", handshakeHash);
     }
 
     @Test

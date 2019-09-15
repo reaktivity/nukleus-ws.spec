@@ -23,7 +23,7 @@ write http:header "Host" "localhost:8080"
 write http:header "Upgrade" "websocket"
 write http:header "Connection" "Upgrade"
 write http:header "Sec-WebSocket-Key" "dGhlIHNhbXBsZSBub25jZQ=="
-write http:header "Sec-WebSocket-Version" ${ws:randomHeaderNot("13")}
+write http:header "Sec-WebSocket-Version" ${http:randomHeaderNot("13")}
 write close
 
 read http:status /4\d\d/ /.+/

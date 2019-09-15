@@ -28,8 +28,8 @@ read http:header "Sec-WebSocket-Version" "13"
 
 write http:status "101" "Switching Protocols"
 write http:version "HTTP/1.1"
-write http:header "Upgrade" ${ws:randomizeLetterCase("websocket")}
-write http:header "Connection" ${ws:randomizeLetterCase("upgrade")}
+write http:header "Upgrade" ${http:randomizeLetterCase("websocket")}
+write http:header "Connection" ${http:randomizeLetterCase("upgrade")}
 write http:header "Sec-WebSocket-Accept" ${ws:handshakeHash(key)}
 write flush
 

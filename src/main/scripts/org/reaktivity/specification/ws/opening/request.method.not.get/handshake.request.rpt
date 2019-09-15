@@ -17,7 +17,7 @@
 connect "http://localhost:8080/path?query"
 connected
 
-write http:method ${ws:randomMethodNot("GET")}
+write http:method ${http:randomMethodNot("GET")}
 write http:version "HTTP/1.1"
 write http:header "Host" "localhost:8080"
 write http:header "Upgrade" "websocket"

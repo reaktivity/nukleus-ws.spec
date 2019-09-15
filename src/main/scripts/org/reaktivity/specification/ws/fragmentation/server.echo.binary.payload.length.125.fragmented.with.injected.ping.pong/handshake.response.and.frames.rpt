@@ -14,11 +14,11 @@
 # under the License.
 #
 
-property server25a ${ws:randomBytes(25)}
-property server25b ${ws:randomBytes(25)}
-property server25c ${ws:randomBytes(25)}
-property server25d ${ws:randomBytes(25)}
-property server25e ${ws:randomBytes(25)}
+property server25a ${http:randomBytes(25)}
+property server25b ${http:randomBytes(25)}
+property server25c ${http:randomBytes(25)}
+property server25d ${http:randomBytes(25)}
+property server25e ${http:randomBytes(25)}
 
 accept "http://localhost:8080/echo"
 accepted
