@@ -20,7 +20,7 @@ connected
 write http:method "GET"
 write http:version "HTTP/1.1"
 write http:header "Host" "localhost:8080"
-write http:header "Upgrade" ${ws:randomHeaderNot("websocket")}
+write http:header "Upgrade" ${http:randomHeaderNot("websocket")}
 write http:header "Connection" "Upgrade"
 write http:header "Sec-WebSocket-Key" "dGhlIHNhbXBsZSBub25jZQ=="
 write http:header "Sec-WebSocket-Version" "13"

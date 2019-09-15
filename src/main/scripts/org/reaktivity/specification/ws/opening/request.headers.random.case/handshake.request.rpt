@@ -20,8 +20,8 @@ connected
 write http:method "GET"
 write http:version "HTTP/1.1"
 write http:host
-write http:header "Upgrade" ${ws:randomizeLetterCase("websocket")}
-write http:header "Connection" ${ws:randomizeLetterCase("upgrade")}
+write http:header "Upgrade" ${http:randomizeLetterCase("websocket")}
+write http:header "Connection" ${http:randomizeLetterCase("upgrade")}
 write http:header "Sec-WebSocket-Key" "dGhlIHNhbXBsZSBub25jZQ=="
 write http:header "Sec-WebSocket-Version" "13"
 

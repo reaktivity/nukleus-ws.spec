@@ -18,8 +18,8 @@
 #       is enhanced to support manifesting this as high-level http
 
 property newHandshakeKey ${ws:handshakeKey()}
-property writeMask ${ws:randomBytes(4)}
-property client124 ${ws:randomBytesUTF8(124)}
+property writeMask ${http:randomBytes(4)}
+property client124 ${http:randomBytesUTF8(124)}
 
 connect await ROUTED_SERVER
         "nukleus://streams/ws#0"

@@ -14,8 +14,8 @@
 # under the License.
 #
 
-property server125 ${ws:randomBytes(125)}
-property serverWriteMask ${ws:randomBytes(4)}
+property server125 ${http:randomBytes(125)}
+property serverWriteMask ${http:randomBytes(4)}
 
 accept "http://localhost:8080/echo"
 accepted

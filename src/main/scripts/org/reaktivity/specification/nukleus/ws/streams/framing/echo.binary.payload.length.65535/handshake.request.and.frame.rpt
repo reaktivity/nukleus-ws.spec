@@ -15,8 +15,8 @@
 #
 
 property key ${ws:handshakeKey()}
-property writeMask ${ws:randomBytes(4)}
-property client65535 ${ws:randomBytes(65535)}
+property writeMask ${http:randomBytes(4)}
+property client65535 ${http:randomBytes(65535)}
 property initialWindow 82000
 
 connect await ROUTED_CLIENT

@@ -15,11 +15,11 @@
 #
 
 property key ${ws:handshakeKey()}
-property writeMaskA ${ws:randomBytes(4)}
-property writeMaskB ${ws:randomBytes(4)}
-property client125 ${ws:randomBytesUnalignedUTF8(125, 25)}
-property client25 ${ws:copyOfRange(client125, 0, 25)}
-property client100 ${ws:copyOfRange(client125, 25, 125)}
+property writeMaskA ${http:randomBytes(4)}
+property writeMaskB ${http:randomBytes(4)}
+property client125 ${http:randomBytesUnalignedUTF8(125, 25)}
+property client25 ${http:copyOfRange(client125, 0, 25)}
+property client100 ${http:copyOfRange(client125, 25, 125)}
 
 connect "http://localhost:8080/echo"
 connected

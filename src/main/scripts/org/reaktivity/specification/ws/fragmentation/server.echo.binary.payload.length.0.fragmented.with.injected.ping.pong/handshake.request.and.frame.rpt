@@ -15,8 +15,8 @@
 #
 
 property key ${ws:handshakeKey()}
-property writeMaskA ${ws:randomBytes(4)}
-property writeMaskB ${ws:randomBytes(4)}
+property writeMaskA ${http:randomBytes(4)}
+property writeMaskB ${http:randomBytes(4)}
 
 connect "http://localhost:8080/echo"
 connected

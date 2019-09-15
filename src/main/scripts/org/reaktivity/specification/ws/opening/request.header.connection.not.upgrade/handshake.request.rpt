@@ -21,7 +21,7 @@ write http:method "GET"
 write http:version "HTTP/1.1"
 write http:host
 write http:header "Upgrade" "websocket"
-write http:header "Connection" ${ws:randomHeaderNot("upgrade")}
+write http:header "Connection" ${http:randomHeaderNot("upgrade")}
 write http:header "Sec-WebSocket-Key" "dGhlIHNhbXBsZSBub25jZQ=="
 write http:header "Sec-WebSocket-Version" "13"
 

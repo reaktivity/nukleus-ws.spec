@@ -15,10 +15,10 @@
 #
 
 property key ${ws:handshakeKey()}
-property writeMaskA ${ws:randomBytes(4)}
-property writeMaskB ${ws:randomBytes(4)}
-property client25a ${ws:randomBytesUTF8(25)}
-property client25b ${ws:randomBytesUTF8(25)}
+property writeMaskA ${http:randomBytes(4)}
+property writeMaskB ${http:randomBytes(4)}
+property client25a ${http:randomBytesUTF8(25)}
+property client25b ${http:randomBytesUTF8(25)}
 
 connect "http://localhost:8080/echo"
 connected

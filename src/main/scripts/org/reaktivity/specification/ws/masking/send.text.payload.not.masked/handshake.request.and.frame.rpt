@@ -15,7 +15,7 @@
 #
 
 property key ${ws:handshakeKey()}
-property client125 ${ws:randomBytesUTF8(125)}
+property client125 ${http:randomBytesUTF8(125)}
 
 connect "http://localhost:8080/echo"
 connected
