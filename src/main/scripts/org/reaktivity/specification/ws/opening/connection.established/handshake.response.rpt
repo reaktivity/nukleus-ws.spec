@@ -25,7 +25,8 @@ accept ${serverTransport}
 accepted
 
 read nukleus:begin.ext ${nukleus:id("http")}
-                       [0x7a 0x00 0x00 0x00]
+                       [0x7e 0x00 0x00 0x00]
+                       [0x05 0x00 0x00 0x00]
                        [0x07] ":method" [0x03 0x00] "GET"
                        [0x07] "upgrade" [0x09 0x00] "websocket"
                        [0x0a] "connection" [0x07 0x00] "upgrade"
