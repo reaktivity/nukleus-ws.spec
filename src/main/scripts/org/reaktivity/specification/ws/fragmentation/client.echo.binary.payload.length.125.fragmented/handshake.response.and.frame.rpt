@@ -1,5 +1,5 @@
 #
-# Copyright 2016-2019 The Reaktivity Project
+# Copyright 2016-2020 The Reaktivity Project
 #
 # The Reaktivity Project licenses this file to you under the Apache License,
 # version 2.0 (the "License"); you may not use this file except in compliance
@@ -26,7 +26,8 @@ accept ${serverTransport}
 accepted
 
 read nukleus:begin.ext ${nukleus:id("http")}
-                       [0xb0 0x00 0x00 0x00]
+                       [0xb4 0x00 0x00 0x00]
+                       [0x08 0x00 0x00 0x00]
                        [0x07] ":scheme" [0x04 0x00] "http"
                        [0x07] ":method" [0x03 0x00] "GET"
                        [0x05] ":path" [0x05 0x00] "/echo"
