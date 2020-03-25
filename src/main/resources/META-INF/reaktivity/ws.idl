@@ -19,10 +19,10 @@ scope ws
     {
         struct WsRouteEx
         {
-            string protocol;
-            string scheme;
-            string authority;
-            string path;
+            string8 protocol;
+            string8 scheme;
+            string8 authority;
+            string8 path;
         }
     }
 
@@ -30,10 +30,10 @@ scope ws
     {
         struct WsBeginEx extends core::stream::Extension
         {
-            string protocol;
-            string scheme;
-            string authority;
-            string path;
+            string8 protocol;
+            string8 scheme;
+            string8 authority;
+            string8 path;
         }
 
         struct WsDataEx extends core::stream::Extension
@@ -45,7 +45,7 @@ scope ws
         struct WsEndEx extends core::stream::Extension
         {
             int16 code;
-            string reason;
+            string8 reason;
         }
     }
 }
