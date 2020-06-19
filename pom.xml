@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.reaktivity</groupId>
   <artifactId>nukleus-ws.spec</artifactId>
-  <version>develop-SNAPSHOT</version>
+  <version>0.54</version>
   <name>WebSocket Nukleus Specification</name>
   <description>WebSocket Nukleus Specification</description>
   <url>https://github.com/reaktivity/nukleus-ws.spec</url>
