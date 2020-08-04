@@ -116,16 +116,6 @@ public class OpeningHandshakeIT
 
     @Test
     @Specification({
-        "${spec}/request.header.sec.websocket.protocol.negotiated/handshake.request",
-        "${spec}/request.header.sec.websocket.protocol.negotiated/handshake.response" })
-    public void shouldEstablishConnectionWithRequestHeaderSecWebSocketProtocolNegotiated()
-            throws Exception
-    {
-        k3po.finish();
-    }
-
-    @Test
-    @Specification({
         "${spec}/request.header.sec.websocket.extensions/handshake.request",
         "${spec}/request.header.sec.websocket.extensions/handshake.response" })
     public void shouldEstablishConnectionWithRequestHeaderSecWebSocketExtensions()
