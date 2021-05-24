@@ -27,7 +27,6 @@ import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
 import org.kaazing.k3po.lang.el.Function;
 import org.kaazing.k3po.lang.el.spi.FunctionMapperSpi;
-import org.reaktivity.nukleus.specification.ws.internal.types.control.WsRouteExFW;
 import org.reaktivity.nukleus.specification.ws.internal.types.stream.WsBeginExFW;
 
 public final class WsFunctions
@@ -38,63 +37,9 @@ public final class WsFunctions
     private static final byte[] WEBSOCKET_GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11".getBytes(US_ASCII);
 
     @Function
-    public static WsRouteExHelper routeEx()
-    {
-        return new WsRouteExHelper();
-    }
-
-    @Function
     public static WsBeginExHelper beginEx()
     {
         return new WsBeginExHelper();
-    }
-
-    public static final class WsRouteExHelper
-    {
-        private final WsRouteExFW.Builder wsRouteExRW;
-
-        private WsRouteExHelper()
-        {
-            MutableDirectBuffer writeBuffer = new UnsafeBuffer(new byte[MAX_BUFFER_SIZE]);
-            this.wsRouteExRW = new WsRouteExFW.Builder()
-                                    .wrap(writeBuffer, 0, writeBuffer.capacity());
-        }
-
-        public WsRouteExHelper protocol(
-            String protocol)
-        {
-            wsRouteExRW.protocol(protocol);
-            return this;
-        }
-
-        public WsRouteExHelper scheme(
-            String scheme)
-        {
-            wsRouteExRW.scheme(scheme);
-            return this;
-        }
-
-        public WsRouteExHelper authority(
-            String authority)
-        {
-            wsRouteExRW.authority(authority);
-            return this;
-        }
-
-        public WsRouteExHelper path(
-            String path)
-        {
-            wsRouteExRW.path(path);
-            return this;
-        }
-
-        public byte[] build()
-        {
-            final WsRouteExFW wsRouteEx = wsRouteExRW.build();
-            final byte[] result = new byte[wsRouteEx.sizeof()];
-            wsRouteEx.buffer().getBytes(0, result);
-            return result;
-        }
     }
 
     public static final class WsBeginExHelper
