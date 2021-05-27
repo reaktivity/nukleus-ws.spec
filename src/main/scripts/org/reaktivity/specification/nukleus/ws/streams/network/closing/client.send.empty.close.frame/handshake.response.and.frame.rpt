@@ -14,9 +14,7 @@
 # under the License.
 #
 
-property serverTransport "nukleus://streams/target#0"
-
-accept ${serverTransport}
+accept "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 accepted

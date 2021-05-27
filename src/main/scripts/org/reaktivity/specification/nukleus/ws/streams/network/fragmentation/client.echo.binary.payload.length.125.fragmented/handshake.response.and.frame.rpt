@@ -18,9 +18,8 @@
 #       is enhanced to support manifesting this as high-level http
 
 property location 'http://localhost:8080/echo'
-property serverTransport "nukleus://streams/target#0"
 
-accept ${serverTransport}
+accept "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "duplex"
 accepted

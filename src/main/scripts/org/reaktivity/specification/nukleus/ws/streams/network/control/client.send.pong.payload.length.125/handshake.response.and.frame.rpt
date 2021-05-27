@@ -17,9 +17,7 @@
 # TODO: revert this script to use k3po http transport as in k3po http specification once k3po
 #       is enhanced to support manifesting this as high-level http
 
-property serverTransport "nukleus://streams/target#0"
-
-accept ${serverTransport}
+accept "nukleus://streams/net#0"
   option nukleus:window 8192
   option nukleus:transmission "half-duplex"
 accepted

@@ -109,11 +109,8 @@ public class ControlIT
     @Specification({
         "client.send.pong.payload.length.0/handshake.request.and.frame",
         "client.send.pong.payload.length.0/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldReceiveClientPongFrameWithEmptyPayload() throws Exception
     {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -121,11 +118,8 @@ public class ControlIT
     @Specification({
         "client.send.pong.payload.length.125/handshake.request.and.frame",
         "client.send.pong.payload.length.125/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldReceiveClientPongFrameWithPayload() throws Exception
     {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 

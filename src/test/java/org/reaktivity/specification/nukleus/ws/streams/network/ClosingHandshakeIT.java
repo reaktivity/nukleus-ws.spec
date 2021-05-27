@@ -23,7 +23,6 @@ import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
-import org.kaazing.k3po.junit.annotation.ScriptProperty;
 import org.kaazing.k3po.junit.annotation.Specification;
 import org.kaazing.k3po.junit.rules.K3poRule;
 
@@ -44,12 +43,9 @@ public class ClosingHandshakeIT
     @Specification({
         "client.send.empty.close.frame/handshake.request.and.frame",
         "client.send.empty.close.frame/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldCompleteCloseHandshakeWhenClientSendEmptyCloseFrame()
             throws Exception
     {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 
@@ -97,12 +93,9 @@ public class ClosingHandshakeIT
     @Specification({
         "client.send.close.frame.with.code.1005/handshake.request.and.frame",
         "client.send.close.frame.with.code.1005/handshake.response.and.frame" })
-    @ScriptProperty("serverTransport \"nukleus://streams/ws#0\"")
     public void shouldFailWebSocketConnectionWhenClientSendCloseFrameWithCode1005()
             throws Exception
     {
-        k3po.start();
-        k3po.notifyBarrier("ROUTED_SERVER");
         k3po.finish();
     }
 

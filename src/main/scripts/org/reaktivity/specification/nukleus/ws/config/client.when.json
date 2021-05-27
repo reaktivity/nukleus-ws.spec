@@ -5,6 +5,16 @@
             "entry": "app#0",
             "type" : "ws",
             "kind": "client",
+            "options":
+            {
+                "defaults":
+                {
+                    "protocol": "primary",
+                    "scheme": "http",
+                    "authority": "localhost:8080",
+                    "path": "/echo"
+                }
+            },
             "routes":
             [
                 {
@@ -12,13 +22,7 @@
                     "when":
                     [
                         {
-                            "protocol": "primary",
-                            "headers":
-                            {
-                                ":scheme": "http",
-                                ":authority": "localhost:8080",
-                                ":path:": "/echo"
-                            }
+                            "protocol": "primary"
                         }
                     ]
                 }
