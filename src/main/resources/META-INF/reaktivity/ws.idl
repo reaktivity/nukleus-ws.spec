@@ -15,17 +15,6 @@
  */
 scope ws
 {
-    scope control
-    {
-        struct WsRouteEx
-        {
-            string8 protocol;
-            string8 scheme;
-            string8 authority;
-            string8 path;
-        }
-    }
-
     scope stream
     {
         struct WsBeginEx extends core::stream::Extension

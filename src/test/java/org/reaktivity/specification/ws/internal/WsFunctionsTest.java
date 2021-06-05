@@ -21,7 +21,6 @@ import static org.kaazing.k3po.lang.internal.el.ExpressionFactoryUtils.newExpres
 import static org.reaktivity.specification.ws.internal.WsFunctions.beginEx;
 import static org.reaktivity.specification.ws.internal.WsFunctions.handshakeHash;
 import static org.reaktivity.specification.ws.internal.WsFunctions.handshakeKey;
-import static org.reaktivity.specification.ws.internal.WsFunctions.routeEx;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
@@ -32,7 +31,6 @@ import org.agrona.concurrent.UnsafeBuffer;
 import org.junit.Before;
 import org.junit.Test;
 import org.kaazing.k3po.lang.internal.el.ExpressionContext;
-import org.reaktivity.nukleus.specification.ws.internal.types.control.WsRouteExFW;
 import org.reaktivity.nukleus.specification.ws.internal.types.stream.WsBeginExFW;
 import org.reaktivity.specification.ws.internal.WsFunctions.WsBeginExHelper;
 
@@ -70,24 +68,6 @@ public class WsFunctionsTest
     {
         String handshakeHash = handshakeHash("dGhlIHNhbXBsZSBub25jZQ==");
         assertEquals("s3pPLMBiTxaQ9kYGzzhZRbK+xOo=", handshakeHash);
-    }
-
-    @Test
-    public void shouldEncodeWsRouteExt()
-    {
-        final byte[] array = routeEx().protocol("primary")
-                                      .scheme("http")
-                                      .authority("localhost:8080")
-                                      .path("/path?query")
-                                      .build();
-
-        DirectBuffer buffer = new UnsafeBuffer(array);
-        WsRouteExFW wsRouteEx = new WsRouteExFW().wrap(buffer, 0, buffer.capacity());
-
-        assertEquals(wsRouteEx.protocol().asString(), "primary");
-        assertEquals(wsRouteEx.scheme().asString(), "http");
-        assertEquals(wsRouteEx.authority().asString(), "localhost:8080");
-        assertEquals(wsRouteEx.path().asString(), "/path?query");
     }
 
     @Test
